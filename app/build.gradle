@@ -30,6 +30,7 @@ dependencies {
 
     compile('com.mikepenz:materialdrawer:5.9.5@aar') {
         transitive = true
+        exclude group: 'com.android.support'
     }
     compile 'com.mikepenz:google-material-typeface:3.0.1.1.original@aar' //Google Material Icons
     compile 'com.mikepenz:fontawesome-typeface:4.7.0.1@aar'     //FontAwesome
