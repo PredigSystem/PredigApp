@@ -29,6 +29,6 @@ public class MapFragment extends Fragment {
     }
 
 
-    //Test
+    //Testing
 
 }
