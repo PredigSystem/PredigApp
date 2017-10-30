@@ -3,5 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="textviewstroke">#e8e8e8</color>
+    <color name="graydetalle">#e8e8e8</color>
+    <color name="graybackground">#e8e8e8</color>
+    <color name="backgroundlight">#e8e8e8</color>
     <color name="other">#FF4081</color>
 </resources>
