@@ -9,8 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import predigsystem.udl.org.predigsystem.BTConnectionActivity;
-import predigsystem.udl.org.predigsystem.BloodPressureMeasurementActivity;
+import predigsystem.udl.org.predigsystem.Activities.BTConnectionActivity;
 import predigsystem.udl.org.predigsystem.R;
 
 
