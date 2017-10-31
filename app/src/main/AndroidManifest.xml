@@ -16,14 +16,6 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.HomeActivity"></activity>
-        <activity android:name=".Activities.BTConnectionActivity" />
-        <activity android:name=".Activities.BloodPressureMeasurementActivity" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD92Nk-q3JrVrcXIxLXTCWMl9x8CNfJi7k" />
-
         <activity android:name=".Activities.LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Activities.HomeActivity"></activity>
+        <activity android:name=".Activities.BTConnectionActivity" />
+        <activity android:name=".Activities.BloodPressureMeasurementActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD92Nk-q3JrVrcXIxLXTCWMl9x8CNfJi7k" />
     </application>
 
 </manifest>
