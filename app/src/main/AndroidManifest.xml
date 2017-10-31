@@ -23,12 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".BTConnectionActivity" />
         <activity android:name=".BloodPressureMeasurementActivity"></activity>
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD92Nk-q3JrVrcXIxLXTCWMl9x8CNfJi7k" />
+        <meta-data android:name="com.google.android.geo.API_KEY"
+                   android:value="AIzaSyD92Nk-q3JrVrcXIxLXTCWMl9x8CNfJi7k" />
 
     </application>
 
