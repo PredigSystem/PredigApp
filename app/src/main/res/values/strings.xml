@@ -6,7 +6,10 @@
     <string name="other">Other</string>
     <string name="settings">Settings</string>
     <string name="logout">Log Out</string>
+    <string name="last_measures">Last Measures</string>
+    <string name="todays_mean">Today\'s mean</string>
+    <string name="systolic">Systolic</string>
+    <string name="diastolic">Diastolic</string>
+    <string name="pulse">Pulse</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
