@@ -1,4 +1,4 @@
-package predigsystem.udl.org.predigsystem;
+package predigsystem.udl.org.predigsystem.Activities;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +21,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import predigsystem.udl.org.predigsystem.Fragments.DashboardFragment;
 import predigsystem.udl.org.predigsystem.Fragments.HomeFragment;
 import predigsystem.udl.org.predigsystem.Fragments.MapFragment;
+import predigsystem.udl.org.predigsystem.R;
 
 public class HomeActivity extends AppCompatActivity{
 

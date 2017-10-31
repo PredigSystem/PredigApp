@@ -5,7 +5,7 @@
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
+         location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity">
+        <activity android:name=".Activities.LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,12 +24,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".BTConnectionActivity" />
-        <activity android:name=".BloodPressureMeasurementActivity"></activity>
+        <activity android:name=".Activities.HomeActivity"></activity>
+        <activity android:name=".Activities.BTConnectionActivity" />
+        <activity android:name=".Activities.BloodPressureMeasurementActivity" />
 
-        <meta-data android:name="com.google.android.geo.API_KEY"
-                   android:value="AIzaSyD92Nk-q3JrVrcXIxLXTCWMl9x8CNfJi7k" />
-
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD92Nk-q3JrVrcXIxLXTCWMl9x8CNfJi7k" />
     </application>
 
 </manifest>
