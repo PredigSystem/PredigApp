@@ -21,6 +21,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import predigsystem.udl.org.predigsystem.Fragments.DashboardFragment;
 import predigsystem.udl.org.predigsystem.Fragments.HomeFragment;
 import predigsystem.udl.org.predigsystem.Fragments.MapFragment;
+import predigsystem.udl.org.predigsystem.Fragments.SettingsFragment;
 import predigsystem.udl.org.predigsystem.R;
 
 public class HomeActivity extends AppCompatActivity{
@@ -97,8 +98,10 @@ public class HomeActivity extends AppCompatActivity{
                             case 3:
                                 break;
                             case 4:
-                                break;
-                        }
+                                fragment = new SettingsFragment();
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.content_layout, fragment)
+                                        .commit();                        }
 
                         return true;
                     }
