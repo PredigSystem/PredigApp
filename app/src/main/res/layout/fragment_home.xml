@@ -7,26 +7,73 @@
     tools:context="predigsystem.udl.org.predigsystem.Fragments.HomeFragment">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_weight="2"/>
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:text="Home"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/md_white_1000"
+    android:elevation="4dp"
+    android:padding="8dp"
+    android:id="@+id/bottombar"
+        android:layout_weight="10"
+    android:layout_marginBottom="0dp"
+    tools:layout_editor_absoluteX="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
 
     <Button
         android:id="@+id/btn_start"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="140dp"
+        android:background="@drawable/round_button"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_weight="10"
         android:text="Start"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="259dp" />
+        android:textColor="@android:color/white"
+        android:visibility="visible"/>
 
-    <TextView
-        android:id="@+id/textView"
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:text="TextView" />
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:padding="8dp"
+        android:id="@+id/bottombar"
+        android:layout_marginBottom="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    <Button
+        android:id="@+id/btn_history"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="History"/>
+
+    <Button
+        android:id="@+id/btn_avb"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Available devices" />
+
+    </LinearLayout>
 
 </LinearLayout>

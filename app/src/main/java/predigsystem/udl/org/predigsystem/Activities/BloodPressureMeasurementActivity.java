@@ -2,6 +2,11 @@ package predigsystem.udl.org.predigsystem.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import predigsystem.udl.org.predigsystem.R;
+
 import predigsystem.udl.org.predigsystem.R;
 
 

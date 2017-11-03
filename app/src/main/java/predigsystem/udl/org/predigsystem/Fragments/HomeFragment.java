@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import predigsystem.udl.org.predigsystem.Activities.BTConnectionActivity;
+import predigsystem.udl.org.predigsystem.Activities.BloodPressureMeasurementActivity;
 import predigsystem.udl.org.predigsystem.R;
 
 
@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getContext(), BTConnectionActivity.class);
+        Intent intent = new Intent(getContext(), BloodPressureMeasurementActivity.class);
         startActivity(intent);
     }
 }

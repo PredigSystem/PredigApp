@@ -5,16 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@color/md_blue_100"
+    android:background="@color/md_blue_200"
     tools:context="predigsystem.udl.org.predigsystem.HomeFragment">
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="Results"
-        android:textSize="16sp"
-        />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:orientation="vertical"
@@ -76,17 +79,17 @@
             android:background="@drawable/edittextshape"/>
 
         <Button
-            android:id="@+id/mpressuressend"
+            android:id="@+id/btn_save"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="25dp"
+            android:background="@color/md_red_600"
             android:text="Save"
             android:textColor="@android:color/white"
-            android:visibility="visible"
-            android:background="@color/md_red_100"/>
+            android:visibility="visible" />
 
     </LinearLayout>
 </LinearLayout>

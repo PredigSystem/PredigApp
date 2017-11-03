@@ -119,13 +119,6 @@
             android:text="Pair"/>
 
         <Button
-            android:id="@+id/btnSynchronize"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Synchronize" />
-
-        <Button
             android:id="@+id/btnDisconnect"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
