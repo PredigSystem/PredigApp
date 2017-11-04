@@ -11,4 +11,12 @@
     <string name="systolic">Systolic</string>
     <string name="diastolic">Diastolic</string>
     <string name="pulse">Pulse</string>
+    <string-array name="list_settings">
+        <item>General</item>
+        <item>Notifications</item>
+        <item>Emergences</item>
+        <item>Timetable</item>
+        <item>User</item>
+        <item>About</item>
+    </string-array>
 </resources>
