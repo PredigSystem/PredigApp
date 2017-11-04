@@ -1,5 +1,6 @@
 package predigsystem.udl.org.predigsystem.Activities;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -95,13 +96,17 @@ public class HomeActivity extends AppCompatActivity{
                                         .replace(R.id.content_layout, fragment)
                                         .commit();
                                 break;
-                            case 3:
-                                break;
                             case 4:
                                 fragment = new SettingsFragment();
                                 getSupportFragmentManager().beginTransaction()
                                         .replace(R.id.content_layout, fragment)
-                                        .commit();                        }
+                                        .commit();
+                                break;
+                            case 5:
+                                Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
+                                startActivity(intent);
+                                finish();
+                        }
 
                         return true;
                     }
