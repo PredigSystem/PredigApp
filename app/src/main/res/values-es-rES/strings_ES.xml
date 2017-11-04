@@ -2,11 +2,11 @@
 <resources>
     <string name="app_name">PredigSystem</string>
     <string name="home">Inicio</string>
-    <string name="dashboard">Dashboard</string>
+    <string name="dashboard">Tablero</string>
     <string name="map">Mapa</string>
     <string name="other">Otros</string>
     <string name="settings">Ajustes</string>
-    <string name="logout">Log Out</string>
+    <string name="logout">Salir</string>
     <string name="last_measures">Últimos registros</string>
     <string name="todays_mean">Today\'s mean</string>
     <string name="systolic">Sistólica</string>
