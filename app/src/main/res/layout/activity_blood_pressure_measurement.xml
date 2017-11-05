@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="@color/md_blue_200"
-    tools:context="predigsystem.udl.org.predigsystem.HomeFragment">
+    tools:context="predigsystem.udl.org.predigsystem.Activities.BloodPressureMeasurementActivity">
 
     <TextView
         android:id="@+id/textView"
