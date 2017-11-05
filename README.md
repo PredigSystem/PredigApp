@@ -59,7 +59,7 @@ The used libraries for the project are:
 
 - [MaterialDrawer](https://github.com/mikepenz/MaterialDrawer/blob/develop/README.md)
 - [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)
-- [AgendaCalendarView](https://github.com/Tibolte/AgendaCalendarView)
+- [ScrollCalendar](https://github.com/RafalManka/ScrollCalendar)
 
 ## Built With
 
