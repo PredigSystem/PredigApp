@@ -19,6 +19,7 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import predigsystem.udl.org.predigsystem.Fragments.ArticleFragment;
 import predigsystem.udl.org.predigsystem.Fragments.CalendarFragment;
 import predigsystem.udl.org.predigsystem.Fragments.DashboardFragment;
 import predigsystem.udl.org.predigsystem.Fragments.HomeFragment;
@@ -43,7 +44,8 @@ public class HomeActivity extends AppCompatActivity{
         SecondaryDrawerItem map = new SecondaryDrawerItem().withIdentifier(2).withName(R.string.map).withIcon(FontAwesome.Icon.faw_map_marker);
         SecondaryDrawerItem calendar = new SecondaryDrawerItem().withIdentifier(3).withName(R.string.calendar).withIcon(FontAwesome.Icon.faw_calendar);
         SecondaryDrawerItem settings = new SecondaryDrawerItem().withIdentifier(4).withName(R.string.settings).withIcon(GoogleMaterial.Icon.gmd_settings);
-        SecondaryDrawerItem logout = new SecondaryDrawerItem().withIdentifier(5).withName(R.string.logout).withIcon(FontAwesome.Icon.faw_sign_out);
+        SecondaryDrawerItem faq = new SecondaryDrawerItem().withIdentifier(5).withName(R.string.faq).withIcon(FontAwesome.Icon.faw_question);
+        SecondaryDrawerItem logout = new SecondaryDrawerItem().withIdentifier(6).withName(R.string.logout).withIcon(FontAwesome.Icon.faw_sign_out);
 
         // Menu Header
         AccountHeader headerResult = new AccountHeaderBuilder()
@@ -74,6 +76,7 @@ public class HomeActivity extends AppCompatActivity{
                         calendar,
                         new SectionDrawerItem().withName(R.string.other),
                         settings,
+                        faq,
                         logout
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -111,7 +114,15 @@ public class HomeActivity extends AppCompatActivity{
                                         .replace(R.id.content_layout, fragment)
                                         .commit();
                                 break;
+
                             case 6:
+                                fragment = new ArticleFragment();
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.content_layout, fragment)
+                                        .commit();
+                                break;
+
+                            case 7:
                                 Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
                                 startActivity(intent);
                                 finish();
