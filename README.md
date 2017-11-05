@@ -1,7 +1,9 @@
 # PredigApp
 Predig System Android Application
 
-One Paragraph of project description goes here
+PredigSystem is a mobile application that allows people calculate their blood pressure, consult all their results in accessible graphics and stores the results in a database where the doctor can access it and analyses the results of a patient. Also, the app notifies if the blood pressure is lower or higher than the normal. And finally, contains a map with the hospitals and clinics near of the user’s location.
+
+More information about the System Requirements can be found [here](https://drive.google.com/file/d/11Vu-Rj1bQWY_hWePEG3bm4dAHVU7ce_7/view?usp=sharing).
 
 ## Getting Started
 
