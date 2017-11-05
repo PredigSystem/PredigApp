@@ -4,6 +4,7 @@
     <string name="home">Inicio</string>
     <string name="dashboard">Tablero</string>
     <string name="map">Mapa</string>
+    <string name="calendar">Calendario</string>
     <string name="other">Otros</string>
     <string name="settings">Ajustes</string>
     <string name="logout">Salir</string>
