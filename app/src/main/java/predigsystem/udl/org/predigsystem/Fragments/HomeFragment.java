@@ -9,11 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import predigsystem.udl.org.predigsystem.Activities.BTConnectionActivity;
 import predigsystem.udl.org.predigsystem.Activities.BloodPressureMeasurementActivity;
+import predigsystem.udl.org.predigsystem.Activities.HistoryActivity;
+import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
 
 
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends Fragment {
 
     public HomeFragment() {
     }
@@ -29,12 +32,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         super.onActivityCreated(savedInstanceState);
 
         Button btn = getActivity().findViewById(R.id.btn_start);
-        btn.setOnClickListener(this);
-    }
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), BloodPressureMeasurementActivity.class);
+                startActivity(intent);
+            }
+        });
 
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(getContext(), BloodPressureMeasurementActivity.class);
-        startActivity(intent);
+        Button btn1 = getActivity().findViewById(R.id.btn_history);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(getContext(),HistoryActivity.class);
+                startActivity(intent1);
+            }
+        });
+
+        Button btn3 = getActivity().findViewById(R.id.btn_avb);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(getContext(), BTConnectionActivity.class);
+                startActivity(intent3);
+            }
+        });
     }
 }
+

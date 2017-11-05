@@ -26,6 +26,7 @@
 
         <activity android:name=".Activities.HomeActivity"></activity>
         <activity android:name=".Activities.BTConnectionActivity" />
+        <activity android:name=".Activities.HistoryActivity"/>
         <activity android:name=".Activities.BloodPressureMeasurementActivity" />
 
         <meta-data
