@@ -1,5 +1,6 @@
 package predigsystem.udl.org.predigsystem.Activities;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,9 +19,11 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import predigsystem.udl.org.predigsystem.Fragments.CalendarFragment;
 import predigsystem.udl.org.predigsystem.Fragments.DashboardFragment;
 import predigsystem.udl.org.predigsystem.Fragments.HomeFragment;
 import predigsystem.udl.org.predigsystem.Fragments.MapFragment;
+import predigsystem.udl.org.predigsystem.Fragments.SettingsFragment;
 import predigsystem.udl.org.predigsystem.R;
 
 public class HomeActivity extends AppCompatActivity{
@@ -38,8 +41,9 @@ public class HomeActivity extends AppCompatActivity{
         SecondaryDrawerItem home = new SecondaryDrawerItem().withIdentifier(0).withName(R.string.home).withIcon(GoogleMaterial.Icon.gmd_home);
         SecondaryDrawerItem dashboard = new SecondaryDrawerItem().withIdentifier(1).withName(R.string.dashboard).withIcon(FontAwesome.Icon.faw_line_chart);
         SecondaryDrawerItem map = new SecondaryDrawerItem().withIdentifier(2).withName(R.string.map).withIcon(FontAwesome.Icon.faw_map_marker);
-        SecondaryDrawerItem settings = new SecondaryDrawerItem().withIdentifier(3).withName(R.string.settings).withIcon(GoogleMaterial.Icon.gmd_settings);
-        SecondaryDrawerItem logout = new SecondaryDrawerItem().withIdentifier(4).withName(R.string.logout).withIcon(FontAwesome.Icon.faw_sign_out);
+        SecondaryDrawerItem calendar = new SecondaryDrawerItem().withIdentifier(3).withName(R.string.calendar).withIcon(FontAwesome.Icon.faw_calendar);
+        SecondaryDrawerItem settings = new SecondaryDrawerItem().withIdentifier(4).withName(R.string.settings).withIcon(GoogleMaterial.Icon.gmd_settings);
+        SecondaryDrawerItem logout = new SecondaryDrawerItem().withIdentifier(5).withName(R.string.logout).withIcon(FontAwesome.Icon.faw_sign_out);
 
         // Menu Header
         AccountHeader headerResult = new AccountHeaderBuilder()
@@ -67,6 +71,7 @@ public class HomeActivity extends AppCompatActivity{
                         home,
                         dashboard,
                         map,
+                        calendar,
                         new SectionDrawerItem().withName(R.string.other),
                         settings,
                         logout
@@ -95,9 +100,21 @@ public class HomeActivity extends AppCompatActivity{
                                         .commit();
                                 break;
                             case 3:
+                                fragment = new CalendarFragment();
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.content_layout, fragment)
+                                        .commit();
                                 break;
-                            case 4:
+                            case 5:
+                                fragment = new SettingsFragment();
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.content_layout, fragment)
+                                        .commit();
                                 break;
+                            case 6:
+                                Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
+                                startActivity(intent);
+                                finish();
                         }
 
                         return true;

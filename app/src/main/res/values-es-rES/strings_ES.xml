@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PredigSystem</string>
+    <string name="home">Inicio</string>
+    <string name="dashboard">Tablero</string>
+    <string name="map">Mapa</string>
+    <string name="calendar">Calendario</string>
+    <string name="other">Otros</string>
+    <string name="settings">Ajustes</string>
+    <string name="logout">Salir</string>
+    <string name="last_measures">Últimos registros</string>
+    <string name="todays_mean">Today\'s mean</string>
+    <string name="systolic">Sistólica</string>
+    <string name="diastolic">Diastólica</string>
+    <string name="pulse">Pulso</string>
+    <string-array name="list_settings">
+        <item>General</item>
+        <item>Notificaciones</item>
+        <item>Emergencias</item>
+        <item>Calendario</item>
+        <item>Usuario</item>
+        <item>About</item>
+    </string-array>
+</resources>
