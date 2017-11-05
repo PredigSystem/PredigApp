@@ -3,6 +3,7 @@
     <string name="home">Home</string>
     <string name="dashboard">Dashboard</string>
     <string name="map">Map</string>
+    <string name="calendar">Calendar</string>
     <string name="other">Other</string>
     <string name="settings">Settings</string>
     <string name="logout">Log Out</string>
@@ -11,6 +12,15 @@
     <string name="systolic">Systolic</string>
     <string name="diastolic">Diastolic</string>
     <string name="pulse">Pulse</string>
+    <string-array name="list_settings">
+        <item>General</item>
+        <item>Notifications</item>
+        <item>Emergences</item>
+        <item>Timetable</item>
+        <item>User</item>
+        <item>About</item>
+    </string-array>
+
     <string-array name="array_blood">
         <item>1. What Causes High Blood Pressure?
 
@@ -94,16 +104,7 @@ Also, many over-the-counter medications that contain pseudoephedrine and ephedri
 
 
 Don't stop taking any prescribed medication, including high blood pressure drugs, without talking to your doctor.</item>
-    </string-array>
-    <string-array name="list_settings">
-        <item>General</item>
-        <item>Notifications</item>
-        <item>Emergences</item>
-        <item>Timetable</item>
-        <item>User</item>
-        <item>About</item>
-    </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    </string-array>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 </resources>
