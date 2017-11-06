@@ -1,5 +1,5 @@
 # PredigApp
-![alt text](https://www.dropbox.com/s/fyz1kzx6b9sgqhv/Logo.png?raw=1 =100x100)
+![alt text](https://www.dropbox.com/s/l70jkqvriviixyu/logo_little.png?dl=0)
 
 Predig System Android Application
 
