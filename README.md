@@ -5,6 +5,7 @@ PredigSystem is a mobile application that allows people calculate their blood pr
 
 More information about the System Requirements can be found [here](https://drive.google.com/file/d/11Vu-Rj1bQWY_hWePEG3bm4dAHVU7ce_7/view?usp=sharing).
 
+Website template can be found [here](https://github.com/PredigSystem/PredigWebApp-prototype). Check out the [demo](https://predigsystem-webapp.herokuapp.com/login.html)
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
