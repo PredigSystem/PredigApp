@@ -7,6 +7,7 @@
     <string name="calendar">Calendario</string>
     <string name="other">Otros</string>
     <string name="settings">Ajustes</string>
+    <string name="notifications">Notificaciones</string>
     <string name="logout">Salir</string>
     <string name="last_measures">Últimos registros</string>
     <string name="todays_mean">Today\'s mean</string>
@@ -21,4 +22,5 @@
         <item>Usuario</item>
         <item>About</item>
     </string-array>
+    <string name="receive_notifications">Desea recibir notificacions?</string>
 </resources>

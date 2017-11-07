@@ -1,27 +1,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="predigsystem.udl.org.predigsystem.Fragments.HomeFragment">
+    tools:context="predigsystem.udl.org.predigsystem.Activities.NotificationSettingsActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="1"
-        android:text="@string/settings"
+        android:text="@string/notifications"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textAllCaps="true"/>
+        android:textAllCaps="true"
+        android:layout_margin="30dp"/>
 
-    <ListView
+    <Switch
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listView_settings"
-        android:entries="@array/list_settings">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:text="@string/receive_notifications"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
 </LinearLayout>
