@@ -10,7 +10,7 @@
     <string name="notifications">Notificaciones</string>
     <string name="logout">Salir</string>
     <string name="last_measures">Últimos registros</string>
-    <string name="todays_mean">Today\'s mean</string>
+    <string name="todays_mean">La media de hoy</string>
     <string name="systolic">Sistólica</string>
     <string name="diastolic">Diastólica</string>
     <string name="pulse">Pulso</string>
@@ -23,4 +23,88 @@
         <item>About</item>
     </string-array>
     <string name="receive_notifications">Desea recibir notificacions?</string>
+    <string-array name="array_blood">
+        <item>1. Que causa la presión alta?
+
+\n Si bien la causa de la hipertensión arterial en la mayoría de las personas sigue sin estar clara, pero la inactividad, la mala alimentación, la obesidad, la edad avanzada y la genética pueden contribuir al desarrollo de la hipertensión.
+</item>
+        <item>2. Que es la presión arterial diastólica y sistólica?
+
+\n La lectura de la presión arterial se mide en milímetros de mercurio (mmHg) y se escribe como presión sistólica. La fuerza de la sangre contra las paredes arteriales a medida que el corazón late, la presión diastólica. Por ejemplo, una lectura de la presión arterial se escribe como 120/80 mmHg o "120 sobre 80". La presión sistólica es 120 y la presión diastólica es 80.</item>
+        <item>3. Que es una presión sanguínea normal?
+
+\n El Comité Nacional Conjunto sobre Prevención, Detección, Evaluación y Tratamiento de la Presión Arterial Alta ha clasificado las mediciones de la presión arterial en varias categorías:
+\n a)Normal blood pressure is systolic pressure less than 120 and diastolic pressure less than 80 mmHg.
+\n b)"Prehipertensión" es presión sistólica de 120-139 o presión diastólica de 80-89 mmHg.
+\n c)La hipertensión de la etapa 1 es la presión sistólica de 140-159 o la presión diastólica de 90-99 mmHg.
+\n d)La hipertensión de la etapa 2 es una presión sistólica de 160 o más o una presión diastólica de 100 o más.</item>
+        <item>4. ¿Qué problemas de salud están asociados con la presión arterial alta?
+
+\n Varias condiciones de salud potencialmente graves están relacionadas con la presión arterial alta, que incluye:
+
+\n a)Aterosclerosis: una enfermedad de las arterias causada por una acumulación de placa o material graso en las paredes internas de los vasos sanguíneos.; hypertension contributes to this buildup by putting added stress and force on the artery walls.
+\n b)Enfermedad cardíaca: Insuficiencia cardíaca (el corazón no es lo suficientemente fuerte como para bombear sangre adecuadamente), enfermedad cardíaca isquémica (el tejido cardíaco no recibe suficiente sangre y oxígeno) y la miocardiopatía hipertrófica hipertrófica (músculo cardíaco engrosado que funciona anormalmente) están asociadas con alta presion sanguinea.
+\n c)Enfermedad renal: la hipertensión puede dañar los vasos sanguíneos y los filtros en los riñones, por lo que los riñones no pueden excretar los desechos adecuadamente. La enfermedad renal también puede causar presión arterial alta, cuando los electrolitos (incluido el sodio) no pueden ser secretados adecuadamente por el cuerpo.
+\n d)Accidente cerebrovascular: la hipertensión puede provocar apoplejía, ya sea al contribuir al proceso de aterosclerosis (que puede provocar bloqueos y / o coágulos) o al debilitar la pared de los vasos sanguíneos y hacer que se rompa.
+\n e)Enfermedad de los ojos: la hipertensión puede dañar los vasos sanguíneos muy pequeños en la retina.</item>
+        <item>5. ¿Cómo sé si tengo presión arterial alta?
+
+\n La presión arterial alta a menudo no tiene ningún síntoma, por lo que generalmente no la siente. Por esa razón, la hipertensión generalmente es diagnosticada por un profesional de la salud durante un chequeo de rutina. Si tiene un pariente cercano con hipertensión u otros factores de riesgo, es especialmente importante prestar atención a su lectura de la presión arterial.
+            \n Si su presión arterial es extremadamente alta, es posible que tenga dolores de cabeza inusualmente fuertes, dolor en el pecho, dificultad para respirar o poca tolerancia al ejercicio. Si tiene alguno de estos síntomas, solicite una evaluación con prontitud.</item>
+        <item>6. ¿Cuál es el tratamiento para la presión arterial alta?
+
+\n El tratamiento de la presión arterial alta por lo general implica hacer cambios en el estilo de vida y, si es necesario, terapia con medicamentos.
+
+\n Los cambios de estilo de vida para la presión arterial alta incluyen:
+
+\n a)Perder peso.
+\n b)Dejar de fumar.
+\n c)Consumir una dieta saludable, como la dieta DASH, que es rica en frutas, verduras, proteína magra y granos integrales y baja en sal y grasa.
+\n d)Reducir la cantidad de sal en las comidas.
+\n e)Ejercicio aeróbico regular (como caminar a paso ligero).
+\n f)Limitar el consumo de alcohol.
+\n g)En busca de tratamiento para la apnea del sueño.
+
+\n Los medicamentos comúnmente prescritos para la presión arterial alta incluyen inhibidores de la ECA, bloqueadores de los receptores de la angiotensina, diuréticos, betabloqueantes, bloqueadores de los canales de calcio y alfabloqueantes (antagonistas alfa-adrenérgicos).
+
+\n Si tiene más de 60 años, el objetivo del tratamiento de la hipertensión es una presión sistólica de 150 y una presión diastólica de 90. El objetivo del tratamiento es de 140/90 para los menores de 60 años.</item>
+        <item>7. ¿Cuáles son los efectos secundarios de los medicamentos para la presión arterial alta??
+
+\n Al igual que con cualquier medicamento, los medicamentos para la hipertensión tienen efectos secundarios. Entre los más comunes están los siguientes:
+
+\n a)Diuréticos: dolor de cabeza, debilidad, bajos niveles de potasio en sangre.
+\n b)Inhibidores de la ECA: tos seca y persistente, dolor de cabeza, diarrea, niveles elevados de potasio en sangre.
+\n c)Bloqueantes del receptor de angiotensina: fatiga, mareos o desmayos, diarrea, niveles elevados de potasio en sangre.
+\n d)Bloqueadores de los canales de calcio: mareos, problemas del ritmo cardíaco, hinchazón del tobillo, estreñimiento.
+\n e)Betabloqueantes: mareos o aturdimiento, disminución de la capacidad sexual, somnolencia, frecuencia cardíaca baja.
+\n f)Alfabloqueantes: mareos, dolor de cabeza, palpitaciones cardíacas, náuseas, debilidad, aumento de peso</item>
+        <item>8. ¿Qué tipo de dieta debo seguir si tengo presión arterial alta?
+
+\n Una dieta saludable, como la dieta DASH (enfoques dietéticos para detener la hipertensión), es efectiva para ayudar a reducir la presión arterial alta. La dieta DASH requiere un cierto número de porciones diarias de varios grupos de alimentos, incluyendo frutas, vegetales y granos integrales.
+\n Los siguientes pasos también pueden ayudar:
+
+\n a)Comer más frutas, vegetales y productos lácteos bajos en grasa.
+\n b)Comer menos alimentos con alto contenido de grasas saturadas y colesterol, como los alimentos fritos.
+\n c)Comiendo más productos de granos enteros, pescado, aves y nueces.
+\n d)Comer menos carnes rojas y dulces.
+\n e)Comer alimentos ricos en magnesio, potasio y calcio.
+\n f)Comer alimentos con menos sodio</item>
+        <item>9. ¿Cuándo debo llamar a mi médico sobre la presión arterial alta?
+
+\n Si se le diagnostica presión arterial alta, es importante que consulte a su médico regularmente. Él o ella pueden responder sus preguntas durante estas visitas.
+
+\n Sin embargo, puede haber otras ocasiones en que necesite hablar con su médico. Por ejemplo:
+
+\n a) Si no está respondiendo al tratamiento prescrito y su presión arterial aún es alta.
+\n b) Si tiene efectos secundarios con los medicamentos para la presión arterial; si esto sucede, es posible que su médico desee ajustar la dosis del medicamento o ponerlo en otro medicamento.</item>
+        <item>10. ¿Hay alguna droga que cause presión arterial alta?
+
+\n Algunos medicamentos que toma para otra afección pueden aumentar la presión arterial. Estos incluyen anfetaminas, metilfenidato (Concerta, Metadate, Methylin, Ritalin), corticosteroides, hormonas (incluidas las píldoras anticonceptivas), ciertos medicamentos para la migraña, ciclosporina y eritropoyetina.
+
+\n Además, muchos medicamentos de venta libre que contienen pseudoefedrina y efedrina (por ejemplo, medicamentos para la alergia y el resfriado y supresores del apetito) pueden aumentar la presión arterial.
+
+
+\n No deje de tomar ningún medicamento recetado, incluidos medicamentos para la presión arterial alta, sin consultar a su médico.</item>
+
+    </string-array>
 </resources>
