@@ -1,6 +1,9 @@
 package predigsystem.udl.org.predigsystem.Activities;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,11 +33,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
+        //getUserPermision();
         mMap = googleMap;
 
         // Add a marker in Lleida and move the camera
         LatLng lleida = LLEIDA_LOC;
         mMap.addMarker(new MarkerOptions().position(lleida).title("Marker in Lleida").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LLEIDA_LOC, 12f));
+    }
+
+    public void getUserPermision () {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            mMap.setMyLocationEnabled(true);
+        }
+        else {
+            finish();
+        }
     }
 }
