@@ -25,39 +25,23 @@
 
     <string name="receive_notifications">Do you want to receive notifications?</string>
 
-    <string-array name="array_blood">
-        <item>1. What Causes High Blood Pressure?
-
-\n While the cause of high blood pressure in most people remains unclear, inactivity, poor diet, obesity, older age, and genetics -- can all contribute to the development of hypertension</item>
-        <item>2. What Is Systolic and Diastolic Blood Pressure?
-
-\n The blood pressure reading is measured in millimeters of mercury (mmHg) and is written as systolic pressure, the force of the blood against the artery walls as your heart beats, over diastolic pressure, the blood pressure between heartbeats. For example, a blood pressure reading is written as 120/80 mmHg, or "120 over 80". The systolic pressure is 120 and the diastolic pressure is 80.</item>
-        <item>3. What Is a Normal Blood Pressure?
-
-\n The Joint National Committee on Prevention, Detection, Evaluation, and Treatment of High Blood Pressure has classified blood pressure measurements into several categories:
+    <string name="ans1">While the cause of high blood pressure in most people remains unclear, inactivity, poor diet, obesity, older age, and genetics -- can all contribute to the development of hypertension</string>
+    <string name="ans2">The blood pressure reading is measured in millimeters of mercury (mmHg) and is written as systolic pressure, the force of the blood against the artery walls as your heart beats, over diastolic pressure, the blood pressure between heartbeats. For example, a blood pressure reading is written as 120/80 mmHg, or "120 over 80". The systolic pressure is 120 and the diastolic pressure is 80.</string>
+    <string name="ans3">The Joint National Committee on Prevention, Detection, Evaluation, and Treatment of High Blood Pressure has classified blood pressure measurements into several categories:
 \n a)Normal blood pressure is systolic pressure less than 120 and diastolic pressure less than 80 mmHg.
 \n b)"Prehypertension" is systolic pressure of 120-139 or diastolic pressure of 80-89 mmHg.
 \n c)Stage 1 Hypertension is systolic pressure of 140-159 or diastolic pressure of 90-99 mmHg.
-\n d)Stage 2 Hypertension is systolic pressure of 160 or greater or diastolic pressure of 100 or greater.</item>
-        <item>4. What Health Problems Are Associated With High Blood Pressure?
-
-\n Several potentially serious health conditions are linked to high blood pressure, including:
-
+\n d)Stage 2 Hypertension is systolic pressure of 160 or greater or diastolic pressure of 100 or greater.</string>
+    <string name="ans4">Several potentially serious health conditions are linked to high blood pressure, including:
 \n a)Atherosclerosis: a disease of the arteries caused by a buildup of plaque, or fatty material, on the inside walls of the blood vessels; hypertension contributes to this buildup by putting added stress and force on the artery walls.
 \n b)Heart Disease: Heart failure (the heart is not strong enough to pump blood adequately), ischemic heart disease (the heart tissue does not get enough blood and oxygen), and hypertensive hypertrophic cardiomyopathy (thickened, abnormally functioning heart muscle) are all associated with high blood pressure.
 \n c)Kidney Disease: Hypertension can damage the blood vessels and filters in the kidneys, so that the kidneys cannot excrete waste properly. Kidney disease can also cause high blood pressure, when electrolytes (including sodium) cannot be adequately secreted from the body.
 \n d)Stroke: Hypertension can lead to stroke, either by contributing to the process of atherosclerosis (which can lead to blockages and/or clots), or by weakening the blood vessel wall and causing it to rupture.
-\n e)Eye Disease: Hypertension can damage the very small blood vessels in the retina.</item>
-        <item>5. How Do I Know if I Have High Blood Pressure?
-
-\n High blood pressure often does not have any symptoms, so you usually do not feel it. For that reason, hypertension is usually diagnosed by a health care professional during a routine checkup. If you have a close relative with hypertension, or other risk factors, it is especially important to pay attention to your blood pressure reading.
-            \n If your blood pressure is extremely high, you may have unusually strong headaches, chest pain, difficulty breathing, or poor exercise tolerance. If you have any of these symptoms, seek an evaluation promptly.</item>
-        <item>6. What Is the Treatment for High Blood Pressure
-
-\n High blood pressure treatment usually involves making lifestyle changes and, if necessary, drug therapy.
-
+\n e)Eye Disease: Hypertension can damage the very small blood vessels in the retina.</string>
+    <string name="ans5">High blood pressure often does not have any symptoms, so you usually do not feel it. For that reason, hypertension is usually diagnosed by a health care professional during a routine checkup. If you have a close relative with hypertension, or other risk factors, it is especially important to pay attention to your blood pressure reading.
+            \n If your blood pressure is extremely high, you may have unusually strong headaches, chest pain, difficulty breathing, or poor exercise tolerance. If you have any of these symptoms, seek an evaluation promptly.</string>
+    <string name="ans6">High blood pressure treatment usually involves making lifestyle changes and, if necessary, drug therapy.
 \n Lifestyle changes for high blood pressure include:
-
 \n a)Losing weight
 \n b)Quitting smoking
 \n c)Eating a healthy diet, such as the DASH diet, which is high in fruits, vegetables, lean protein and whole grains and low in salt and fat
@@ -65,23 +49,19 @@
 \n e)Regular aerobic exercise (such as brisk walking)
 \n f)Limiting alcohol consumption
 \n g)Seeking treatment for sleep apnea
-
 \n Commonly prescribed high blood pressure drugs include ACE inhibitors, angiotensin receptor blockers, diuretics, beta-blockers, calcium channel blockers, and alpha-blockers (alpha-adrenergic antagonists).
-
-\n If you are over age 60, the goal of hypertension treatment is a systolic pressure of 150 and a diastolic pressure of 90. The goal of treatment is 140/90 for those under age 60.</item>
-        <item>7. What Are the Side Effects of High Blood Pressure Drugs?
-
-\n As is true with any medication, high blood pressure drugs have side effects. Among the most common are the following:
+\n If you are over age 60, the goal of hypertension treatment is a systolic pressure of 150 and a diastolic pressure of 90. The goal of treatment is 140/90 for those under age 60.</string>
+    <string name="ans7">
+As is true with any medication, high blood pressure drugs have side effects. Among the most common are the following:
 
 \n a)Diuretics: headache, weakness, low potassium blood levels
 \n b)ACE inhibitors: dry and persistent cough, headache, diarrhea, high potassium blood levels
 \n c)Angiotensin receptor blockers: fatigue, dizziness or fainting, diarrhea, high potassium blood levels
 \n d)Calcium channel blockers: dizziness, heart rhythm problems, ankle swelling, constipation
 \n e)Beta-blockers: dizziness or lightheadedness, decreased sexual ability, drowsiness, low heart rate
-\n f)Alpha-blockers: dizziness, headache, pounding heartbeat, nausea, weakness, weight gain</item>
-        <item>8. What Type of Diet Should I Follow if I Have High Blood Pressure
-
-\n A healthy diet, such as the DASH (Dietary Approaches to Stop Hypertension) diet, is effective in helping to lower high blood pressure. The DASH diet calls for a certain number of daily servings from various food groups, including fruits, vegetables, and whole grains.
+\n f)Alpha-blockers: dizziness, headache, pounding heartbeat, nausea, weakness, weight gain
+    </string>
+    <string name="ans8">A healthy diet, such as the DASH (Dietary Approaches to Stop Hypertension) diet, is effective in helping to lower high blood pressure. The DASH diet calls for a certain number of daily servings from various food groups, including fruits, vegetables, and whole grains.
 
 \n The following steps can also help:
 
@@ -90,23 +70,34 @@
 \n c)Eating more whole grain products, fish, poultry, and nuts
 \n d)Eating less red meat and sweets
 \n e)Eating foods that are high in magnesium, potassium, and calcium
-\n f)Eating foods with less sodium</item>
-        <item>9. When Should I Call My Doctor About High Blood Pressure?
-
-\n If you are diagnosed with high blood pressure, it is important to see your doctor on a regular basis. He or she can answer your questions during these visits.
+\n f)Eating foods with less sodium
+    </string>
+    <string name="ans9">
+If you are diagnosed with high blood pressure, it is important to see your doctor on a regular basis. He or she can answer your questions during these visits.
 
 \n However, there may be other times when you may need to speak to your doctor. For instance:
 
 \n a) If you are not responding to the prescribed treatment and your blood pressure is still high
-\n b) If you are having any side effects from the blood pressure medication; if this happens, your doctor may wish to adjust the dosage of the medication or put you on another medication.</item>
-        <item>10. Are There any Drugs that Cause High Blood Pressure?
-
-\n Some drugs that you take for another condition may increase blood pressure. These include amphetamines, methylphenidate (Concerta, Metadate, Methylin, Ritalin), corticosteroids, hormones (including birth control pills), certain migraine medications, cyclosporine, and erythropoietin.
-
+\n b) If you are having any side effects from the blood pressure medication; if this happens, your doctor may wish to adjust the dosage of the medication or put you on another medication.
+    </string>
+    <string name="ans10">
+Some drugs that you take for another condition may increase blood pressure. These include amphetamines, methylphenidate (Concerta, Metadate, Methylin, Ritalin), corticosteroids, hormones (including birth control pills), certain migraine medications, cyclosporine, and erythropoietin.
 \n Also, many over-the-counter medications that contain pseudoephedrine and ephedrine (for example, allergy and cold medicines and appetite suppressants) can increase blood pressure.
+\n Do not stop taking any prescribed medication, including high blood pressure drugs, without talking to your doctor.
+    </string>
 
 
-\n Do not stop taking any prescribed medication, including high blood pressure drugs, without talking to your doctor.</item>
+    <string-array name="array_blood">
+        <item>1. What Causes High Blood Pressure?</item>
+        <item>2. What Is Systolic and Diastolic Blood Pressure?</item>
+        <item>3. What Is a Normal Blood Pressure?</item>
+        <item>4. What Health Problems Are Associated With High Blood Pressure?</item>
+        <item>5. How Do I Know if I Have High Blood Pressure?</item>
+        <item>6. What Is the Treatment for High Blood Pressure</item>
+        <item>7. What Are the Side Effects of High Blood Pressure Drugs?</item>
+        <item>8. What Type of Diet Should I Follow if I Have High Blood Pressure</item>
+        <item>9. When Should I Call My Doctor About High Blood Pressure?</item>
+        <item>10. Are There any Drugs that Cause High Blood Pressure?</item>
 
     </string-array>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
