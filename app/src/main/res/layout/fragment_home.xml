@@ -12,68 +12,41 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
-        android:text="Home"
+        android:text="Welcome to PredigSystem"
+        android:textAllCaps="true"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:textAllCaps="true"/>
+        android:textStyle="bold" />
+
 
     <LinearLayout
-        android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/md_white_1000"
-    android:elevation="4dp"
-    android:padding="8dp"
-    android:id="@+id/bottombar"
-        android:layout_weight="10"
-    android:layout_marginBottom="0dp"
-    tools:layout_editor_absoluteX="0dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
-
-    <Button
-        android:id="@+id/btn_start"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:background="@drawable/round_button"
-        android:layout_gravity="center"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="25dp"
-        android:layout_weight="10"
-        android:text="Start"
-        android:textColor="@android:color/white"
-        android:visibility="visible"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp"
-        android:padding="8dp"
         android:id="@+id/bottombar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
-        tools:layout_editor_absoluteX="0dp"
+        android:layout_weight="10"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        tools:layout_editor_absoluteX="0dp">
 
-    <Button
-        android:id="@+id/btn_history"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="History"/>
-
-    <Button
-        android:id="@+id/btn_avb"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Available devices" />
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/round_button"
+            android:text="Start"
+            android:textColor="@android:color/white"
+            android:visibility="visible" />
 
     </LinearLayout>
+
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:bb_tabXmlResource="@xml/bottom" />
 
 </LinearLayout>

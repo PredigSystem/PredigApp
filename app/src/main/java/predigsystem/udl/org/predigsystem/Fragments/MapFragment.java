@@ -1,9 +1,15 @@
-package predigsystem.udl.org.predigsystem.Activities;
+package predigsystem.udl.org.predigsystem.Fragments;
+
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -13,19 +19,29 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import predigsystem.udl.org.predigsystem.R;
 
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class MapFragment extends Fragment implements OnMapReadyCallback{
 
     private GoogleMap mMap;
-
     private static final LatLng LLEIDA_LOC = new LatLng(41.607644, 0.622699);
+    private MapView mapView;
+
+    public MapFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
-    public void onCreate (Bundle savecInstanceBundle) {
-        super.onCreate(savecInstanceBundle);
-        setContentView(R.layout.fragment_map);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        return view;
     }
 
     @Override
@@ -37,4 +53,5 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(lleida).title("Marker in Lleida").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LLEIDA_LOC, 12f));
     }
+
 }

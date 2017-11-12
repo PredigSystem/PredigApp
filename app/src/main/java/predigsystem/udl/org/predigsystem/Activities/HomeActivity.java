@@ -23,6 +23,7 @@ import predigsystem.udl.org.predigsystem.Fragments.ArticleFragment;
 import predigsystem.udl.org.predigsystem.Fragments.CalendarFragment;
 import predigsystem.udl.org.predigsystem.Fragments.DashboardFragment;
 import predigsystem.udl.org.predigsystem.Fragments.HomeFragment;
+import predigsystem.udl.org.predigsystem.Fragments.MapFragment;
 import predigsystem.udl.org.predigsystem.Fragments.SettingsFragment;
 import predigsystem.udl.org.predigsystem.R;
 
@@ -96,8 +97,10 @@ public class HomeActivity extends AppCompatActivity{
                                         .commit();
                                 break;
                             case 2:
-                                Intent intentMap = new Intent(getApplicationContext(), MapActivity.class);
-                                startActivity(intentMap);
+                                fragment = new MapFragment();
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.content_layout, fragment)
+                                        .commit();
                                 break;
                             case 3:
                                 fragment = new CalendarFragment();

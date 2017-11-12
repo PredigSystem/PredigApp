@@ -40,6 +40,7 @@ dependencies {
     compile 'pl.rafman.widgets:scroll-calendar:1.5.1', {
         exclude group: 'com.android.support'
     }
+    compile 'com.roughike:bottom-bar:2.3.1'
     testCompile 'junit:junit:4.12'
 }
 
