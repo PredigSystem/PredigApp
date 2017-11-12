@@ -2,12 +2,16 @@ package predigsystem.udl.org.predigsystem.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import predigsystem.udl.org.predigsystem.Activities.BTConnectionActivity;
 import predigsystem.udl.org.predigsystem.Activities.BloodPressureMeasurementActivity;
@@ -40,21 +44,20 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        Button btn1 = getActivity().findViewById(R.id.btn_history);
-        btn1.setOnClickListener(new View.OnClickListener() {
+        BottomBar bottomBar = (BottomBar) getActivity().findViewById(R.id.bottomBar);
+        bottomBar.setDefaultTab(R.id.tab_home);
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(getContext(),HistoryActivity.class);
-                startActivity(intent1);
-            }
-        });
-
-        Button btn3 = getActivity().findViewById(R.id.btn_avb);
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent3 = new Intent(getContext(), BTConnectionActivity.class);
-                startActivity(intent3);
+            public void onTabSelected(@IdRes int tabId) {
+                Intent intent;
+                if (tabId == R.id.tab_favourites) {
+                    intent = new Intent(getContext(), HistoryActivity.class);
+                    startActivity(intent);
+                }
+                if (tabId == R.id.tab_host) {
+                    intent = new Intent(getContext(), BTConnectionActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

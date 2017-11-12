@@ -1,0 +1,12 @@
+<tabs>
+    <tab
+        id="@+id/tab_home"
+        title="Home" />
+    <tab
+        id="@+id/tab_favourites"
+        title="History" />
+    <tab
+        id="@+id/tab_host"
+        title="Available devices" />
+</tabs>
+
