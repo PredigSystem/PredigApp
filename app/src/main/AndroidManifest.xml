@@ -29,7 +29,6 @@
         <activity android:name=".Activities.HistoryActivity"/>
         <activity android:name=".Activities.BloodPressureMeasurementActivity" />
         <activity android:name=".Activities.NotificationSettingsActivity"/>
-        <activity android:name=".Activities.MapActivity"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

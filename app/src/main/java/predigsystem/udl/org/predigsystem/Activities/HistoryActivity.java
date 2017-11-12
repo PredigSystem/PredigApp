@@ -28,10 +28,12 @@ public class HistoryActivity extends AppCompatActivity {
                                 if (tabId == R.id.tab_home) {
                                         intent = new Intent(getApplicationContext(), HomeActivity.class);
                                         startActivity(intent);
+                                        finish();
                                 }
                                 if (tabId == R.id.tab_host) {
                                         intent = new Intent(getApplicationContext(), BTConnectionActivity.class);
                                         startActivity(intent);
+                                        finish();
                                 }
                         }
                 });

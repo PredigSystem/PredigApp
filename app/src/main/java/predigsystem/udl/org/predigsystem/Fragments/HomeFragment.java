@@ -53,10 +53,12 @@ public class HomeFragment extends Fragment {
                 if (tabId == R.id.tab_favourites) {
                     intent = new Intent(getContext(), HistoryActivity.class);
                     startActivity(intent);
+                    getActivity().finish();
                 }
                 if (tabId == R.id.tab_host) {
                     intent = new Intent(getContext(), BTConnectionActivity.class);
                     startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
