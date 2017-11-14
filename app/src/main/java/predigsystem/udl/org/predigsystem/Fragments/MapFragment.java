@@ -1,14 +1,23 @@
 package predigsystem.udl.org.predigsystem.Fragments;
 
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -18,6 +27,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +42,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 import predigsystem.udl.org.predigsystem.R;
 
@@ -39,11 +50,14 @@ import predigsystem.udl.org.predigsystem.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MapFragment extends Fragment implements OnMapReadyCallback{
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mGoogleMap;
-    private static final LatLng LLEIDA_LOC = new LatLng(41.607644, 0.622699);
-    private MapView mapView;
+    private Location userLocation;
+    private FusedLocationProviderClient mFusedLocationClient;
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
+    private boolean firstMarkers = true;
 
     public MapFragment() {
         // Required empty public constructor
@@ -65,21 +79,56 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
 
-        // Add a marker in Lleida and move the camera
-        LatLng lleida = LLEIDA_LOC;
-        mGoogleMap.addMarker(new MarkerOptions().position(lleida).title("Marker in Lleida").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LLEIDA_LOC, 12f));
-        StringBuilder sbValue = new StringBuilder(sbMethod());
+        // Add a user position and move the camera
+        // If user Location is not found, Lleida will be the default one
+        userLocation = new Location("userLocation");
+        userLocation.setLatitude(41.6183731);
+        userLocation.setLongitude(0.6024253);
+
+        getUserLocation();
+        LatLng userLoc = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());;
+        mGoogleMap.addMarker(new MarkerOptions().position(userLoc).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLoc, 12f));
+
+        StringBuilder sbValue = new StringBuilder(sbMethod("hospital"));
         PlacesTask placesTask = new PlacesTask();
         placesTask.execute(sbValue.toString());
+
+        StringBuilder sbValue2 = new StringBuilder(sbMethod("pharmacy"));
+        PlacesTask placesTask2 = new PlacesTask();
+        placesTask2.execute(sbValue2.toString());
+
+        mGoogleMap.setOnInfoWindowClickListener(this);
     }
 
-    public StringBuilder sbMethod() {
+    private void getUserLocation(){
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[] {
+                            android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                            android.Manifest.permission.ACCESS_COARSE_LOCATION },
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+            return;
+        }
+        mFusedLocationClient.getLastLocation()
+                .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null) {
+                            userLocation = location;
+                        }else{
+                            Toast.makeText(getContext(), "Cannot acces to your position", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    public StringBuilder sbMethod(String type) {
 
         StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        sb.append("location=" + LLEIDA_LOC.latitude + "," + LLEIDA_LOC.longitude);
+        sb.append("location=" + userLocation.getLatitude() + "," + userLocation.getLongitude());
         sb.append("&radius=5000");
-        sb.append("&types=" + "hospital");
+        sb.append("&types=" + type);
         sb.append("&sensor=true");
         sb.append("&key=AIzaSyCJLNUZCzIdz3nnOYWE1TLMaHn9jietHmc");
 
@@ -124,6 +173,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
             urlConnection.disconnect();
         }
         return data;
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        String search = marker.getTitle();
+
+        if(!search.equals("You are here")){
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.es/search?q=" + search));
+            startActivity(browserIntent);
+        }
     }
 
     private class PlacesTask extends AsyncTask<String, Integer, String> {
@@ -179,8 +238,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
         protected void onPostExecute(List<HashMap<String, String>> list) {
 
             Log.d("Map", "list size: " + list.size());
-            // Clears all the existing markers;
-            mGoogleMap.clear();
 
             for (int i = 0; i < list.size(); i++) {
 
@@ -200,8 +257,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
                 // Getting name
                 String name = hmPlace.get("place_name");
 
-                Log.d("Map", "place: " + name);
-
                 // Getting vicinity
                 String vicinity = hmPlace.get("vicinity");
 
@@ -212,12 +267,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
 
                 markerOptions.title(name + " : " + vicinity);
 
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                if(firstMarkers){
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                }else{
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                }
 
                 // Placing a marker on the touched position
                 Marker m = mGoogleMap.addMarker(markerOptions);
 
             }
+            //Next markers will be green
+            firstMarkers = false;
         }
     }
 
