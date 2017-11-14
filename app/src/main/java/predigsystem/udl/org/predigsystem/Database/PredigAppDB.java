@@ -35,6 +35,9 @@ public class PredigAppDB extends SQLiteOpenHelper {
             "Reason VARCHAR(200), " +
             "nif VARCHAR(12), FOREIGN KEY (nif) REFERENCES User(NIF) )";
 
+    public String SQLInsert_Root = "INSERT INTO User (NIF, Password, Name, Email, Phone, Address, createdAt) VALUES ('00000000X', '1234', 'Root', 'root@udl.cat' ,'666666666', 'C/ Root 1234', '13/11/2017')";
+
+
     public PredigAppDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -45,6 +48,7 @@ public class PredigAppDB extends SQLiteOpenHelper {
         db.execSQL(SQLCreate_Role); //Execute the sentence to create de role's Database
         db.execSQL(SQLCREATE_BloodPressure); //Execute the sentence to create de BloodPressure's Database
         db.execSQL(SQLCreate_VisitsDoctor); //Execute the sentence to create de VisitDoctor's Database
+        db.execSQL(SQLInsert_Root); //Insert the user to test
     }
 
     @Override
