@@ -101,4 +101,8 @@ Some drugs that you take for another condition may increase blood pressure. Thes
 
     </string-array>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+
+    <string name="marker_red">You are here</string>
+    <string name="marker_orange">Hospitals</string>
+    <string name="marker_yellow">Pharmacies</string>
 </resources>
