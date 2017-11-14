@@ -1,11 +1,12 @@
 package predigsystem.udl.org.predigsystem.Activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
@@ -25,6 +26,7 @@ import predigsystem.udl.org.predigsystem.Fragments.DashboardFragment;
 import predigsystem.udl.org.predigsystem.Fragments.HomeFragment;
 import predigsystem.udl.org.predigsystem.Fragments.MapFragment;
 import predigsystem.udl.org.predigsystem.Fragments.SettingsFragment;
+import predigsystem.udl.org.predigsystem.JavaClasses.Session;
 import predigsystem.udl.org.predigsystem.R;
 
 public class HomeActivity extends AppCompatActivity{
@@ -37,6 +39,8 @@ public class HomeActivity extends AppCompatActivity{
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //TODO Get the nif and the name by the email;
+        Session session = new Session("", "", getIntent().getExtras().getString("email"));
 
         // Menu Items
         SecondaryDrawerItem home = new SecondaryDrawerItem().withIdentifier(0).withName(R.string.home).withIcon(GoogleMaterial.Icon.gmd_home);

@@ -1,13 +1,10 @@
 package predigsystem.udl.org.predigsystem.Activities;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
 import predigsystem.udl.org.predigsystem.R;
 
 
@@ -18,6 +15,7 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        final EditText editText = findViewById(R.id.input_email);
         PredigAppDB predigAppDB = new PredigAppDB(this, "PredigAppDB", null, 1);
         SQLiteDatabase db = predigAppDB.getWritableDatabase();
 
