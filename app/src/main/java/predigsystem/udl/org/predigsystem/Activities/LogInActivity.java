@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
 import predigsystem.udl.org.predigsystem.R;
@@ -21,15 +22,17 @@ public class LogInActivity extends AppCompatActivity {
         PredigAppDB predigAppDB = new PredigAppDB(this, "PredigAppDB", null, 1);
         SQLiteDatabase db = predigAppDB.getWritableDatabase();
 
-        if(db != null){
+        /*if(db != null){
             db.execSQL("INSERT INTO User (NIF, Password, Name, Email, Phone, Address, createdAt) VALUES ('00000000X', '1234', 'Root', 'root@udl.cat' ,'666666666', 'C/ Root 1234', '13/11/2017')");
-        }
+        }*/
 
+        final EditText editText = findViewById(R.id.input_email);
         Button btn = findViewById(R.id.btn_login);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                intent.putExtra("email", editText.getText().toString());
                 startActivity(intent);
                 finish();
             }

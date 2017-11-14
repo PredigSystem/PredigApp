@@ -23,8 +23,8 @@ public class PredigAppDB extends SQLiteOpenHelper {
             "( Role VARCHAR(15), " + "nif VARCHAR(12), FOREIGN KEY (nif) REFERENCES User(NIF) )";
 
     public String SQLCREATE_BloodPressure = "CREATE TABLE BloodPressure " +
-            "( Systolic DOUBLE, " +
-            "Diastolic DOUBLE, " +
+            "( Systolic FLOAT, " +
+            "Diastolic FLOAT, " +
             "Date VARCHAR(10), " +
             "Position VARCHAR(50), " +
             "nif VARCHAR(12), FOREIGN KEY (nif) REFERENCES User(NIF) )";

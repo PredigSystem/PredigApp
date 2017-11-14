@@ -6,8 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
+import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
 
 import predigsystem.udl.org.predigsystem.R;
@@ -15,10 +21,15 @@ import predigsystem.udl.org.predigsystem.R;
 
 public class BloodPressureMeasurementActivity extends AppCompatActivity {
 
+    BloodPressure bloodPressure;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_pressure_measurement);
+
+        Calendar calendar = Calendar.getInstance();
+        bloodPressure = new BloodPressure(new Float(16.4), new Float(13.8), calendar.getTime());
 
         Button btn2 = findViewById(R.id.btn_save);
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +48,7 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
         SQLiteDatabase db = predigAppDB.getWritableDatabase();
 
         if(db != null) {
-            db.execSQL("INSERT INTO BloodPressure (Systolic, Diastolic, Date, Position, nif) VALUES (16.4, 13.8, '13/11/2017', 'Lleida', '00000000X')");
+            db.execSQL("INSERT INTO BloodPressure (Systolic, Diastolic, Date, Position, nif) VALUES ('" +bloodPressure.getSystolic() +"', '"+bloodPressure.getDiastolic()+"', '"+bloodPressure.getDateTaken()+"', 'Lleida', '00000000X')");
         }
     }
 }
