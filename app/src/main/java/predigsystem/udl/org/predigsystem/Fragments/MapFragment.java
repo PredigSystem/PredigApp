@@ -56,6 +56,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private Location userLocation;
     private FusedLocationProviderClient mFusedLocationClient;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private static final String GOOGLE_MAPS_KEY = "AIzaSyCJLNUZCzIdz3nnOYWE1TLMaHn9jietHmc";
 
     private boolean firstMarkers = true;
 
@@ -71,7 +72,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
         return view;
     }
 
@@ -130,7 +130,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         sb.append("&radius=5000");
         sb.append("&types=" + type);
         sb.append("&sensor=true");
-        sb.append("&key=AIzaSyCJLNUZCzIdz3nnOYWE1TLMaHn9jietHmc");
+        sb.append("&key=" + GOOGLE_MAPS_KEY);
 
         Log.d("Map", "api: " + sb.toString());
 
@@ -268,9 +268,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 markerOptions.title(name + " : " + vicinity);
 
                 if(firstMarkers){
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
                 }else{
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
                 }
 
                 // Placing a marker on the touched position
