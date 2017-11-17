@@ -1,11 +1,14 @@
 package predigsystem.udl.org.predigsystem.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
@@ -29,7 +32,7 @@ import predigsystem.udl.org.predigsystem.Fragments.SettingsFragment;
 import predigsystem.udl.org.predigsystem.JavaClasses.Session;
 import predigsystem.udl.org.predigsystem.R;
 
-public class HomeActivity extends AppCompatActivity{
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,7 @@ public class HomeActivity extends AppCompatActivity{
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         Fragment fragment;
-                        switch (position - 1){
+                        switch (position - 1) {
                             case 0:
                                 fragment = new HomeFragment();
                                 getSupportFragmentManager().beginTransaction()
@@ -144,4 +147,5 @@ public class HomeActivity extends AppCompatActivity{
                 .commit();
 
     }
+
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Location on the Map">
+<ListPreference
+    android:key="prefRadiusLocation"
+    android:entries="@array/radiusLocation"
+    android:summary="@string/pref_location_summary"
+    android:entryValues="@array/radiusLocationValues"
+    android:title="@string/pref_location"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

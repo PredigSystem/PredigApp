@@ -7,22 +7,9 @@
     tools:context="predigsystem.udl.org.predigsystem.Activities.NotificationSettingsActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/notificationsContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/notifications"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textAllCaps="true"
-        android:layout_margin="30dp"/>
-
-    <Switch
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/receive_notifications"
-        android:textSize="20sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        tools:context=".Activities.NotificationSettingsActivity" />
 
 </LinearLayout>
