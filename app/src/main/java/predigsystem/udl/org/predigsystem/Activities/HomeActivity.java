@@ -43,7 +43,10 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //TODO Get the nif and the name by the email;
-        Session session = new Session("", "", getIntent().getExtras().getString("email"));
+        String text = getIntent().getExtras().getString("email");
+        if(text != null || !text.isEmpty()) {
+            Session session = new Session("", "", text);
+        }
 
         // Menu Items
         SecondaryDrawerItem home = new SecondaryDrawerItem().withIdentifier(0).withName(R.string.home).withIcon(GoogleMaterial.Icon.gmd_home);
