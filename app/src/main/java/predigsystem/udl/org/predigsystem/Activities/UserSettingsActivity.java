@@ -1,0 +1,50 @@
+package predigsystem.udl.org.predigsystem.Activities;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+
+
+import predigsystem.udl.org.predigsystem.R;
+
+
+public class UserSettingsActivity extends PreferenceActivity {
+
+    private static final int RESULT_SETTINGS = 1;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.preferences);
+    }
+
+    private void showUserSettings() {
+        SharedPreferences sharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("\n" + "Change Email Address:\t" + sharedPrefs.getString("email_address", "No EMail Address Provided"));
+        builder.append("\n" + "Change Password:\t" + sharedPrefs.getString("password", "No Password Provided"));
+
+        builder.append("\n Send report:"
+                + sharedPrefs.getBoolean("prefSendReport", false));
+
+        builder.append("\n Sync Frequency: "
+                + sharedPrefs.getString("prefSyncFrequency", "NULL"));
+
+        TextView settingsTextView = (TextView) findViewById(R.id.textUserSettings);
+
+        settingsTextView.setText(builder.toString());
+    }
+
+
+}
+

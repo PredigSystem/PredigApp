@@ -26,7 +26,8 @@ public class PredigAppDB extends SQLiteOpenHelper {
             "( Systolic FLOAT, " +
             "Diastolic FLOAT, " +
             "Date VARCHAR(10), " +
-            "Position VARCHAR(50), " +
+            "Latitude FLOAT, " +
+            "Longitude FLOAT, " +
             "nif VARCHAR(12), FOREIGN KEY (nif) REFERENCES User(NIF) )";
 
     public String SQLCreate_VisitsDoctor = "CREATE TABLE VisitsDoctor " +
