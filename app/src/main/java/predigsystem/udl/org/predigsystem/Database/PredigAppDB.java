@@ -25,6 +25,7 @@ public class PredigAppDB extends SQLiteOpenHelper {
     public String SQLCREATE_BloodPressure = "CREATE TABLE BloodPressure " +
             "( Systolic FLOAT, " +
             "Diastolic FLOAT, " +
+            "Pulse FLOAT, " +
             "Date LONG, " +
             "Latitude FLOAT, " +
             "Longitude FLOAT, " +

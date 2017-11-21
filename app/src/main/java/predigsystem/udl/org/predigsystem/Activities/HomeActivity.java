@@ -43,9 +43,12 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //TODO Get the nif and the name by the email;
-        String text = getIntent().getExtras().getString("email");
-        if(text != null || !text.isEmpty()) {
-            Session session = new Session("", "", text);
+        Session session;
+        try{
+            String text = getIntent().getExtras().getString("email");
+            session = new Session("", "", text);
+        }catch (Exception e){
+            session = null;
         }
 
         // Menu Items

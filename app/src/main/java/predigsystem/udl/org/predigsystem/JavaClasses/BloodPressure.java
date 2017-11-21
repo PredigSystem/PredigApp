@@ -9,11 +9,20 @@ import java.util.Date;
 public class BloodPressure {
     private Float systolic;
     private Float diastolic;
+    private Float pulse;
     private Date dateTaken;
 
     public BloodPressure(Float systolic, Float diastolic, Date dateTaken) {
         this.systolic = systolic;
         this.diastolic = diastolic;
+        this.dateTaken = dateTaken;
+        this.pulse = null;
+    }
+
+    public BloodPressure(Float systolic, Float diastolic, Float pulse, Date dateTaken) {
+        this.systolic = systolic;
+        this.diastolic = diastolic;
+        this.pulse = pulse;
         this.dateTaken = dateTaken;
     }
 
@@ -39,5 +48,13 @@ public class BloodPressure {
 
     public void setDateTaken(Date dateTaken) {
         this.dateTaken = dateTaken;
+    }
+
+    public Float getPulse() {
+        return pulse;
+    }
+
+    public void setPulse(Float pulse) {
+        this.pulse = pulse;
     }
 }

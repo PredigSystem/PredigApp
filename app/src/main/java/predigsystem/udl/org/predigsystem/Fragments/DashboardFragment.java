@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -31,6 +32,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -73,9 +75,10 @@ public class DashboardFragment extends Fragment {
                 if (cursor.moveToFirst()) {
                     Float syst = cursor.getFloat(0);
                     Float dias = cursor.getFloat(1);
+                    Float pulse = cursor.getFloat(2);
                     Date date = new Date(cursor.getLong(3));
 
-                    BloodPressure b = new BloodPressure(syst, dias, date);
+                    BloodPressure b = new BloodPressure(syst, dias, pulse, date);
                     bpList.add(b);
                 }
             } finally {
@@ -86,9 +89,21 @@ public class DashboardFragment extends Fragment {
         List<Entry> entryList = new ArrayList<Entry>();
         List<Entry> entryList2 = new ArrayList<Entry>();
 
+        BloodPressure lastBP = null;
+        Date lastDate = new Date(Long.MIN_VALUE);
+        List<BloodPressure> todayBP = new ArrayList<>();
+
         for(BloodPressure b: bpList){
             entryList.add(new Entry(b.getDateTaken().getTime(), b.getSystolic()));
             entryList2.add(new Entry(b.getDateTaken().getTime(), b.getDiastolic()));
+
+            if(b.getDateTaken().after(lastDate)){
+                lastBP = b;
+                lastDate = b.getDateTaken();
+            }
+            if(isToday(b.getDateTaken())){
+                todayBP.add(b);
+            }
         }
 
         LineDataSet setComp1 = new LineDataSet(entryList, "Systolic");
@@ -104,5 +119,43 @@ public class DashboardFragment extends Fragment {
         LineData data = new LineData(dataSets);
         chart.setData(data);
         chart.invalidate();
+
+        if(lastBP != null){
+            ((TextView)getActivity().findViewById(R.id.lastSystolic)).setText("" + lastBP.getSystolic());
+            ((TextView)getActivity().findViewById(R.id.lastDiastolic)).setText("" + lastBP.getDiastolic());
+            ((TextView)getActivity().findViewById(R.id.lastPulse)).setText("" + lastBP.getPulse());
+        }
+
+        Float systolicMean = 0f, diastolicMean = 0f, pulseMean = 0f;
+        for(BloodPressure b: todayBP){
+            systolicMean += b.getSystolic();
+            diastolicMean += b.getDiastolic();
+            pulseMean += b.getPulse();
+        }
+
+        if(bpList.size() > 0){
+            systolicMean = systolicMean / bpList.size();
+            diastolicMean = diastolicMean / bpList.size();
+            pulseMean = pulseMean / bpList.size();
+
+            ((TextView)getActivity().findViewById(R.id.systolicMean)).setText("" + systolicMean);
+            ((TextView)getActivity().findViewById(R.id.diastolicMean)).setText("" + diastolicMean);
+            ((TextView)getActivity().findViewById(R.id.pulseMean)).setText("" + pulseMean);
+        }
+    }
+
+    private boolean isToday(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        cal.setTime(new Date());
+        int todayYear = cal.get(Calendar.YEAR);
+        int todayMonth = cal.get(Calendar.MONTH);
+        int todayDay = cal.get(Calendar.DAY_OF_MONTH);
+
+        return year == todayYear && month == todayMonth && day == todayDay;
     }
 }

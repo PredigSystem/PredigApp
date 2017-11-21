@@ -49,10 +49,11 @@
             android:layout_gravity="center">
 
             <TextView
+                android:id="@+id/systolicMean"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="11.30"
+                android:text="?"
                 android:textColor="@color/colorAccent"
                 android:textSize="34sp"
                 android:textStyle="bold" />
@@ -73,12 +74,13 @@
             android:layout_gravity="center">
 
             <TextView
+                android:id="@+id/diastolicMean"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="8.0"
+                android:gravity="center"
+                android:text="?"
                 android:textColor="@color/colorAccent"
                 android:textSize="34sp"
-                android:gravity="center"
                 android:textStyle="bold" />
 
             <TextView
@@ -97,12 +99,13 @@
             android:layout_gravity="center">
 
             <TextView
+                android:id="@+id/pulseMean"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="84"
+                android:gravity="center"
+                android:text="?"
                 android:textColor="@color/colorAccent"
                 android:textSize="34sp"
-                android:gravity="center"
                 android:textStyle="bold" />
 
             <TextView
@@ -140,12 +143,13 @@
             android:layout_gravity="center">
 
             <TextView
+                android:id="@+id/lastSystolic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="12.0"
+                android:gravity="center"
+                android:text="?"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="34sp"
-                android:gravity="center"
                 android:textStyle="bold" />
 
             <TextView
@@ -164,12 +168,13 @@
             android:layout_gravity="center">
 
             <TextView
+                android:id="@+id/lastDiastolic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="8.0"
+                android:gravity="center"
+                android:text="?"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="34sp"
-                android:gravity="center"
                 android:textStyle="bold" />
 
             <TextView
@@ -188,12 +193,13 @@
             android:layout_gravity="center">
 
             <TextView
+                android:id="@+id/lastPulse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="84"
+                android:gravity="center"
+                android:text="?"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="34sp"
-                android:gravity="center"
                 android:textStyle="bold" />
 
             <TextView

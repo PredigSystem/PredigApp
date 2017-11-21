@@ -40,7 +40,7 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_pressure_measurement);
 
-        bloodPressure = new BloodPressure(new Float(16.4), new Float(13.8), new Date());
+        bloodPressure = new BloodPressure(new Float(14.4), new Float(7.8), new Float(98),new Date());
 
         userLocation = new Location("userLocation"); //Default Lleida
         userLocation.setLatitude(41.6183731);
@@ -65,7 +65,7 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
         SQLiteDatabase db = predigAppDB.getWritableDatabase();
 
         if(db != null) {
-            db.execSQL("INSERT INTO BloodPressure (Systolic, Diastolic, Date, Latitude, Longitude, nif) VALUES ('" +bloodPressure.getSystolic() +"', '"+bloodPressure.getDiastolic()+"', '"+bloodPressure.getDateTaken().getTime()+"', '"+userLocation.getLatitude()+"', '" + userLocation.getLongitude()+"', '00000000X')");
+            db.execSQL("INSERT INTO BloodPressure (Systolic, Diastolic, Pulse, Date, Latitude, Longitude, nif) VALUES ('" +bloodPressure.getSystolic() +"', '"+bloodPressure.getDiastolic()+"', '"+bloodPressure.getPulse()+"', '"+bloodPressure.getDateTaken().getTime()+"', '"+userLocation.getLatitude()+"', '" + userLocation.getLongitude()+"', '00000000X')");
         }
     }
 
