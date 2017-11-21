@@ -174,5 +174,17 @@ Some drugs that you take for another condition may increase blood pressure. Thes
 
     <string name="pref_location_summary">Set the views of the Map</string>
     <string name="pref_location">Change the view on the map</string>
-    
+
+    <string name="pref_network">Network</string>
+    <string name="pref_network_type">Network type</string>
+    <string name="pref_network_type_summary">Choose the network that can be used.</string>
+
+    <string-array name="pref_networks">
+        <item>Mobile Data and Wi-Fi</item>
+        <item>Only Wi-Fi</item>
+    </string-array>
+    <string-array name="pref_networks_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>
