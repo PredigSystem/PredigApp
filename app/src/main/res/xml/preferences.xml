@@ -46,4 +46,15 @@
             android:title="@string/pref_sync_frequency" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/pref_network" >
+        <ListPreference
+            android:defaultValue="false"
+            android:key="prefNetwork"
+            android:summary="@string/pref_network_type_summary"
+            android:title="@string/pref_network_type"
+            android:entries="@array/pref_networks"
+            android:entryValues="@array/pref_networks_values">
+        </ListPreference>
+    </PreferenceCategory>
+
 </PreferenceScreen>
