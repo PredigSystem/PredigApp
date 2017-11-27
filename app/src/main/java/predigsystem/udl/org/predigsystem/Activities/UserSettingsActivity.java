@@ -20,9 +20,21 @@ public class UserSettingsActivity extends PreferenceActivity {
     private static final int RESULT_SETTINGS = 1;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case RESULT_SETTINGS:
+                showUserSettings();
+                break;
+
+        }
     }
 
     private void showUserSettings() {
@@ -44,7 +56,5 @@ public class UserSettingsActivity extends PreferenceActivity {
 
         settingsTextView.setText(builder.toString());
     }
-
-
-}
+    }
 

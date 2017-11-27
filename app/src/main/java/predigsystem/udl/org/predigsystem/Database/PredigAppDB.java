@@ -26,7 +26,7 @@ public class PredigAppDB extends SQLiteOpenHelper {
             "( Systolic FLOAT, " +
             "Diastolic FLOAT, " +
             "Pulse FLOAT, " +
-            "Date LONG, " +
+            "Date VARCHAR(10), " +
             "Latitude FLOAT, " +
             "Longitude FLOAT, " +
             "nif VARCHAR(12), FOREIGN KEY (nif) REFERENCES User(NIF) )";

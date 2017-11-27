@@ -1,5 +1,6 @@
 package predigsystem.udl.org.predigsystem.Activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -15,10 +16,24 @@ import predigsystem.udl.org.predigsystem.R;
 
 public class LocationActivity extends PreferenceActivity {
 
+    private static final int RESULT_SETTINGS = 1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.pref_location);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case RESULT_SETTINGS:
+                showUserSettings();
+                break;
+
+        }
     }
 
     private void showUserSettings() {

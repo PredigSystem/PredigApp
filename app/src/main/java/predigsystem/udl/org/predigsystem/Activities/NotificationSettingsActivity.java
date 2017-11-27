@@ -1,6 +1,7 @@
 package predigsystem.udl.org.predigsystem.Activities;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -17,11 +18,26 @@ import predigsystem.udl.org.predigsystem.R;
 
 public class NotificationSettingsActivity extends PreferenceActivity {
 
+
+    private static final int RESULT_SETTINGS = 1;
+
     @Override
     public void onCreate(Bundle savedInstanceBundle) {
         super.onCreate(savedInstanceBundle);
         addPreferencesFromResource(R.xml.pref_notification);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case RESULT_SETTINGS:
+                showUserSettings();
+                break;
+
+        }
     }
 
     private void showUserSettings() {
