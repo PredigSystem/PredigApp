@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PredigSystem</string>
+    <string name="home">Inici</string>
+    <string name="dashboard">Tauler</string>
+    <string name="map">Mapa</string>
+    <string name="calendar">Calendari</string>
+    <string name="other">Altres</string>
+    <string name="settings">Configuració</string>
+    <string name="notifications">Notificacions</string>
+    <string name="logout">Sortir</string>
+    <string name="last_measures">Últims registres</string>
+    <string name="todays_mean">La mesura d\'avui</string>
+    <string name="systolic">Sistòlica</string>
+    <string name="diastolic">Diastòlica</string>
+    <string name="pulse">Pols</string>
+    <string-array name="list_settings">
+        <item>General</item>
+        <item>Notificacions</item>
+        <item>Emergències</item>
+        <item>Calendari</item>
+        <item>Usuari</item>
+        <item>Sobre</item>
+    </string-array>
+    <string name="receive_notifications">Vol rebre notificacions?</string>
+    <string-array name="array_blood">
+        <item>1. Que causa la presió alta?
+
+\n
+Si bé la causa de la hipertensió arterial en la majoria de les persones segueix sense estar clara, però la inactivitat, la mala alimentació, l'obesitat, l'edat avançada i la genètica poden contribuir al desenvolupament de la hipertensió.
+</item>
+        <item>2. Que és la pressió arterial diastòlica i sistòlica?
+
+\n
+La lectura de la pressió arterial es mesura en mil·límetres de mercuri (mmHg) i s'escriu com pressió sistòlica. La força de la sang contra les parets arterials a mesura que el cor batega, la pressió diastòlica. Per exemple, una lectura de la pressió arterial s'escriu com 120/80 mmHg o "120 sobre 80". La pressió sistòlica és 120 i la pressió diastòlica és 80.</item>
+        <item>3. Que és una pressió sanguínia normal?
+
+\n El Comitè Nacional Conjunt sobre Prevenció, Detecció, Avaluació i Tractament de la Pressió Arterial Alta ha classificat els mesuraments de la pressió arterial en diverses categories:
+\n a)La pressió arterial normal és la pressió sistòlica inferior a 120 i la pressió diastòlica inferior a 80 mmHg.
+\n b)"Prehipertensió" és pressió sistòlica de 120-139 o pressió diastòlica de 80-89 mmHg.
+\n c)La hipertensió de l'etapa 1 és la pressió sistòlica de 140-159 o la pressió diastòlica de 90-99 mmHg.
+\n d)La hipertensió de l'etapa 2 és una pressió sistòlica de 160 o més o una pressió diastòlica de 100 o més.</item>
+        <item>4. Quins problemes de salut estan associats amb la pressió arterial alta?
+
+\n Diverses condicions de salut potencialment greus estan relacionades amb la pressió arterial alta, que inclou:
+
+\n a)Aterosclerosi: una malaltia de les artèries causada per una acumulació de placa o material gras en les parets internes dels vasos sanguinis.
+\n b)Malaltia cardíaca: Insuficiència cardíaca (el cor no és prou fort com per bombar sang adequadament), malaltia cardíaca isquèmica (el teixit cardíac no rep prou sang i oxigen) i la miocardiopatia hipertròfica hipertròfica (múscul cardíac engrossit que funciona anormalment) estan associades amb alta pressió sanguínia.
+\n c)Malaltia renal: la hipertensió pot danyar els vasos sanguinis i els filtres en els ronyons, de manera que els ronyons no poden excretar les deixalles adequadament. La malaltia renal també pot causar pressió arterial alta, quan els electròlits (inclòs el sodi) no poden ser secretats adequadament pel cos.
+\n d)Accident cerebrovascular: la hipertensió pot provocar apoplexia, ja sigui en contribuir al procés d'aterosclerosi (que pot provocar bloquejos i / o coàguls) o al debilitar la paret dels vasos sanguinis i fer que es trenqui.
+\n e)Malaltia dels ulls: la hipertensió pot danyar els vasos sanguinis molt petits en la retina.</item>
+        <item>5. Com sé si tinc pressió arterial alta?
+
+
+\n La pressió arterial alta sovint no té cap símptoma, per la qual cosa generalment no la sent. Per aquesta raó, la hipertensió generalment és diagnosticada per un professional de la salut durant una revisió de rutina. Si té un parent proper amb hipertensió o altres factors de risc, és especialment important prestar atenció a la seva lectura de la pressió arterial.
+            \n
+Si la seva pressió arterial és extremadament alta, és possible que tingui mals de cap inusualment forts, dolor al pit, dificultat per respirar o poca tolerància a l'exercici. Si té algun d'aquests símptomes, sol·liciti una avaluació amb promptitud.</item>
+        <item>6. Quin és el tractament per a la pressió arterial alta?
+
+\n El tractament de la pressió arterial alta en general implica fer canvis en l'estil de vida i, si cal, teràpia amb medicaments.
+
+\n Els canvis d'estil de vida per a la pressió arterial alta inclouen:
+
+\n a)Perdre pes
+\n b)Deixar de fumar.
+\n c)Consumir una dieta saludable, com la dieta DASH, que es rica en fruites, verdures, proteína magra i grans integrales, baixa en sal i grasa.
+\n d)Reduir la quantitat de sal en els menjars.
+\n e)Exercici aeròbic regular (com caminar a pas lleuger).
+\n f)Limitar el consum d'alcohol.
+\n g)En busca de tractament de l'apnea del son.
+
+\n Els medicaments comunament prescrits per la pressió arterial alta inclouen inhibidors de l'ECA, bloquejadors dels receptors de l'angiotensina, diürètics, betabloquejants, bloquejadors dels canals de calci i alfablocadors (antagonistes alfa-adrenèrgics).
+
+\n Si té més de 60 anys, l'objectiu del tractament de la hipertensió és una pressió sistòlica de 150 i una pressió diastòlica de 90. L'objectiu del tractament és de 140/90 per als menors de 60 anys.</item>
+        <item>7. Quins són els efectes secundaris dels medicaments per la pressió arterial alta?
+
+\n Igual que amb qualsevol medicament, els medicaments per a la hipertensió tenen efectes secundaris. Entre els més comuns hi ha els següents:
+
+\n a)Diürètics: mal de cap, debilitat, baixos nivells de potassi en sang.
+\n b)Inhibidors de l'ECA: tos seca i persistent, mal de cap, diarrea, nivells elevats de potassi en sang.
+\n c)Blocadors del receptor d'angiotensina: fatiga, marejos o desmais, diarrea, nivells elevats de potassi en sang.
+\n d)Bloquejadors dels canals de calci: marejos, problemes del ritme cardíac, inflor del turmell, restrenyiment.
+\n e)Betabloquejants: marejos o atordiment, disminució de la capacitat sexual, somnolència, freqüència cardíaca baixa.
+\n f)Alfablocadors: marejos, mal de cap, palpitacions cardíaques, nàusees, debilitat, augment de pes</item>
+        <item>8. Quin tipus de dieta he de fer si tinc pressió arterial alta?
+
+\n Una dieta saludable, com la dieta DASH (enfocaments dietètics per aturar la hipertensió), és efectiva per ajudar a reduir la pressió arterial alta. La dieta DASH requereix un cert nombre de porcions diàries de diversos grups d'aliments, incloent fruites, vegetals i grans integrals.
+\n Els següents passos també poden ajudar:
+
+\n a)Menjar més fruites, vegetals i productes lactis baixos en greix.
+\n b)Menjar menys aliments amb alt contingut de greixos saturats i colesterol, com els aliments fregits.
+\n c)Menjant més productes de grans sencers, peix, aus i nous.
+\n d)Menjar menys carns vermelles i dolces.
+\n e)Menjar aliments rics en magnesi, potassi i calci.
+\n f)Menjar aliments amb menys sodi</item>
+        <item>9. Quan he trucar al meu metge sobre la pressió arterial alta?
+
+\n Si se li diagnostica pressió arterial alta, és important que consulti al seu metge regularment. Ell o ella poden respondre les seves preguntes durant aquestes visites.
+
+\n No obstant això, pot haver-hi altres ocasions en que necessiti parlar amb el seu metge. Per exemple:
+
+\n a) Si no està responent al tractament prescrit i la seva pressió arterial encara és alta.
+\n b) Si té efectes secundaris amb els medicaments per a la pressió arterial; si això succeeix, és possible que el seu metge voleu ajustar la dosi del medicament o posar-lo en un altre medicament.</item>
+        <item>10. Hi ha alguna droga que causi pressió arterial alta?
+
+\n Alguns medicaments que pren per a una altra afecció poden augmentar la pressió arterial. Aquests inclouen amfetamines, metilfenidat (Concerta, Metadate, Methylin, Ritalin), corticosteroides, hormones (incloses les píndoles anticonceptives), certs medicaments per la migranya, ciclosporina i eritropoetina.
+
+\n A més, molts medicaments de venda lliure que contenen pseudoefedrina i efedrina (per exemple, medicaments per l'al·lèrgia i el refredat i supressors de la gana) poden augmentar la pressió arterial.
+
+
+\n No deixeu de prendre cap medicament receptat, inclosos medicaments per la pressió arterial alta, sense consultar al seu metge.</item>
+
+    </string-array>
+
+
+    <string name="hello_blank_fragment" translatable="false">Hola fragment buit</string>
+
+    <string name="marker_red">Vosté està aquí</string>
+    <string name="marker_orange">Hospitals</string>
+    <string name="marker_yellow">Farmàcies</string>
+
+
+    <string name="title_activity_settings2">Configuració</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Habilitar recomanacions socials</string>
+    <string name="pref_description_social_recommendations">Recomanacions perquè les persones es posin en contacte en funció del seu historial de missatges</string>
+
+    <string name="pref_title_display_name">Nom de visualització</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Agrega amics als missatges</string>
+    <string-array name="pref_example_list_titles">
+        <item>Sempre</item>
+        <item>Quan sigui possible</item>
+        <item>Mai</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Dades &amp; sincronització</string>
+
+    <string name="pref_title_sync_frequency">Freqüència de sincronització</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minuts</item>
+        <item>30 minuts</item>
+        <item>1 hores</item>
+        <item>3 hores</item>
+        <item>6 hores</item>
+        <item>Mai</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string name="pref_title_system_sync_settings">Configuració de sincronització del sistema</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notificacions</string>
+
+    <string name="pref_title_new_message_notifications">Noves notificacions de missatge</string>
+
+    <string name="pref_title_ringtone">To de trucada</string>
+    <string name="pref_ringtone_silent">Silenci</string>
+
+    <string name="pref_title_vibrate">Vibració</string>
+    <string name="pref_update_setting">Ajustos de actualització</string>
+    <string name="pref_send_report">Envia informes d\'error</string>
+    <string name="pref_send_report_summary">Ajuda a reparar errors</string>
+    <string name="pref_sync_frequency">Freqüència de sincronització</string>
+    <string name="pref_sync_frequency_summary">Establir la freqüència de sincronització</string>
+    <string name="pref_title_display_password">Canvia la contrasenya</string>
+
+    <string name="pref_location_summary">Conjunt de vistes del mapa</string>
+    <string name="pref_location">Canvia la vista del mapa</string>
+
+    <string name="pref_network">Connectivitat</string>
+    <string name="pref_network_type">Tipus connectivitat</string>
+    <string name="pref_network_type_summary">Tria la xarxa que vol utilitzar.</string>
+
+    <string-array name="pref_networks">
+        <item>Dades mòbils i Wi-Fi</item>
+        <item>Només Wi-Fi</item>
+    </string-array>
+    <string-array name="pref_networks_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+</resources>
