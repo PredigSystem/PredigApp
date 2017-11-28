@@ -107,4 +107,91 @@
 \n No deje de tomar ningún medicamento recetado, incluidos medicamentos para la presión arterial alta, sin consultar a su médico.</item>
 
     </string-array>
+
+    <string name="hello_blank_fragment" translatable="false">Hola fragment vacío</string>
+
+    <string name="marker_red">Usted está aquí</string>
+    <string name="marker_orange">Hospitales</string>
+    <string name="marker_yellow">Farmacias</string>
+
+
+    <string name="title_activity_settings2">Configuración</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Habilitar recomendaciones sociales</string>
+    <string name="pref_description_social_recommendations">Recomendaciones para que las personas se pongan en contacto en función de su historial de mensajes</string>
+
+    <string name="pref_title_display_name">Nombre para mostrar</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Agrega amigos a los mensajes</string>
+    <string-array name="pref_example_list_titles">
+        <item>Siempre</item>
+        <item>Cuando sea posible</item>
+        <item>Nunca</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Datos &amp; sincronización</string>
+
+    <string name="pref_title_sync_frequency">Frecuencia de sincronización</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutos</item>
+        <item>30 minutos</item>
+        <item>1 horas</item>
+        <item>3 horas</item>
+        <item>6 horas</item>
+        <item>Nunca</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string name="pref_title_system_sync_settings">Configuración de sincronización del sistema</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notificaciones</string>
+
+    <string name="pref_title_new_message_notifications">Nuevas notificaciones de mensajes</string>
+
+    <string name="pref_title_ringtone">Tono de llamada</string>
+    <string name="pref_ringtone_silent">Silencio</string>
+
+    <string name="pref_title_vibrate">Vibración</string>
+    <string name="pref_update_setting">Ajustes de actualización</string>
+    <string name="pref_send_report">Enviar informes de fallos</string>
+    <string name="pref_send_report_summary">Ayuda a reparar errores</string>
+    <string name="pref_sync_frequency">Frecuencia de sincronización</string>
+    <string name="pref_sync_frequency_summary">Establecer la frecuencia de sincronización</string>
+    <string name="pref_title_display_password">Cambia la contraseña</string>
+
+    <string name="pref_location_summary">Conjunto de vistas del mapa</string>
+    <string name="pref_location">Cambia la vista del mapa</string>
+
+    <string name="pref_network">Connectividad</string>
+    <string name="pref_network_type">Tipo connectividad</string>
+    <string name="pref_network_type_summary">Escoge la red que quiere utilizar.</string>
+
+    <string-array name="pref_networks">
+        <item>Datos móbiles y Wi-Fi</item>
+        <item>Solo Wi-Fi</item>
+    </string-array>
+    <string-array name="pref_networks_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>
