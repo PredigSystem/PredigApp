@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -55,10 +56,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private GoogleMap mGoogleMap;
     private Location userLocation;
     private FusedLocationProviderClient mFusedLocationClient;
+    private List<MarkerType> markers = new ArrayList<>();
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private static final String GOOGLE_MAPS_KEY = "AIzaSyCJLNUZCzIdz3nnOYWE1TLMaHn9jietHmc";
 
     private boolean firstMarkers = true;
+    private boolean hospitalEnabled = true;
+    private boolean pharmacyEnabled = true;
 
     public MapFragment() {
         // Required empty public constructor
@@ -72,6 +76,45 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        ImageButton imageButton = view.findViewById(R.id.hospitalButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!markers.isEmpty()){
+                    for(MarkerType t: markers){
+                        if(t.isHospital){
+                            if(hospitalEnabled){
+                                t.marker.remove();
+                            }else{
+                                t.marker = mGoogleMap.addMarker(t.markerOptions);
+                            }
+                        }
+                    }
+                    hospitalEnabled = !hospitalEnabled;
+                }
+            }
+        });
+
+        ImageButton imageButton2 = view.findViewById(R.id.pharmacyButton);
+        imageButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!markers.isEmpty()){
+                    for(MarkerType t: markers){
+                        if(!t.isHospital){
+                            if(pharmacyEnabled){
+                                t.marker.remove();
+                            }else{
+                                t.marker = mGoogleMap.addMarker(t.markerOptions);
+                            }
+                        }
+                    }
+                    pharmacyEnabled = !pharmacyEnabled;
+                }
+            }
+        });
+
         return view;
     }
 
@@ -267,14 +310,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
                 markerOptions.title(name + " : " + vicinity);
 
+                Boolean isHospital;
                 if(firstMarkers){
                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                    isHospital = true;
                 }else{
                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                    isHospital = false;
                 }
 
                 // Placing a marker on the touched position
                 Marker m = mGoogleMap.addMarker(markerOptions);
+                markers.add(new MarkerType(m, markerOptions, isHospital));
 
             }
             //Next markers will be green
@@ -357,6 +404,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 e.printStackTrace();
             }
             return place;
+        }
+    }
+
+    private class MarkerType {
+        Marker marker;
+        MarkerOptions markerOptions;
+        Boolean isHospital; //if not, will be Pharmacy
+
+        public MarkerType(Marker marker, MarkerOptions markerOptions, Boolean isHospital) {
+            this.marker = marker;
+            this.markerOptions = markerOptions;
+            this.isHospital = isHospital;
         }
     }
 
