@@ -52,10 +52,14 @@ tools:context="predigsystem.udl.org.predigsystem.Fragments.MapFragment">
             android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="30dp"
+            <ImageButton
+                android:id="@+id/hospitalButton"
+                android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@color/material_drawer_dark_divider"
+                android:scaleType="fitCenter"
                 android:src="@drawable/marker_orange" />
 
             <TextView
@@ -73,11 +77,15 @@ tools:context="predigsystem.udl.org.predigsystem.Fragments.MapFragment">
             android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="30dp"
+            <ImageButton
+                android:id="@+id/pharmacyButton"
+                android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:src="@drawable/marker_yellow" />
+                android:src="@drawable/marker_yellow"
+                android:background="@color/material_drawer_dark_divider"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true" />
 
             <TextView
                 android:layout_width="wrap_content"
