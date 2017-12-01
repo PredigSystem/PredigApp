@@ -54,8 +54,8 @@ public class HomeFragment extends Fragment {
 
 
         text = (TextView) getActivity().findViewById(R.id.txt_TextDateTime);
-        btn_date = (Button)getActivity().findViewById(R.id.btn_datePicker);
-        btn_time = (Button)getActivity().findViewById(R.id.btn_timePicker);
+        //btn_date = (Button)getActivity().findViewById(R.id.btn_datePicker);
+        //btn_time = (Button)getActivity().findViewById(R.id.btn_timePicker);
 
         Button btn = getActivity().findViewById(R.id.btn_start);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        btn_date.setOnClickListener(new View.OnClickListener() {
+        /*btn_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateDate();
@@ -97,7 +97,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 updateTime();
             }
-        });
+        });*/
 
         updateTextLabel();
     }

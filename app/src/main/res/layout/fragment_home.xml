@@ -72,7 +72,7 @@
         android:id="@+id/txt_TextDateTime" />
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -101,7 +101,7 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/btn_datePicker"
         android:layout_centerHorizontal="true" />
-    </LinearLayout>
+    </LinearLayout>-->
 
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottomBar"
