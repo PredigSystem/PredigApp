@@ -33,11 +33,13 @@ public class PredigAppDB extends SQLiteOpenHelper {
 
     public String SQLCreate_VisitsDoctor = "CREATE TABLE VisitsDoctor " +
             "( Doctor VARCHAR(100), " +
-            "Date VARCHAR(10)," +
+            "Date VARCHAR(12)," +
+            "Time VARCHAR(5)," +
             "Reason VARCHAR(200), " +
-            "nif VARCHAR(12), FOREIGN KEY (nif) REFERENCES User(NIF) )";
+            "NIF VARCHAR(12), FOREIGN KEY (nif) REFERENCES User(NIF) )";
 
     public String SQLInsert_Root = "INSERT INTO User (NIF, Password, Name, Email, Phone, Address, createdAt) VALUES ('00000000X', '1234', 'Root', 'root@udl.cat' ,'666666666', 'C/ Root 1234', '13/11/2017')";
+    public String SQLInsert_Visit = "INSERT INTO VisitsDoctor (Doctor, Date, Time,Reason, NIF) VALUES ('Test doctor', '05/12/2017', '10:15','No reason', '00000000X')";
 
 
     public PredigAppDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -51,6 +53,7 @@ public class PredigAppDB extends SQLiteOpenHelper {
         db.execSQL(SQLCREATE_BloodPressure); //Execute the sentence to create de BloodPressure's Database
         db.execSQL(SQLCreate_VisitsDoctor); //Execute the sentence to create de VisitDoctor's Database
         db.execSQL(SQLInsert_Root); //Insert the user to test
+        db.execSQL(SQLInsert_Visit); //Insert the user to test
     }
 
     @Override

@@ -28,8 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Email"
-                android:text="root@udl.cat"/>
+                android:hint="User"
+                android:text="00000000X"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
