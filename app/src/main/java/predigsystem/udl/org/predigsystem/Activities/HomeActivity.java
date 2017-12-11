@@ -2,6 +2,8 @@ package predigsystem.udl.org.predigsystem.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -23,6 +25,7 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
 import predigsystem.udl.org.predigsystem.Fragments.ArticleFragment;
 import predigsystem.udl.org.predigsystem.Fragments.CalendarFragment;
 import predigsystem.udl.org.predigsystem.Fragments.DashboardFragment;
@@ -34,6 +37,8 @@ import predigsystem.udl.org.predigsystem.R;
 
 public class HomeActivity extends AppCompatActivity {
 
+    SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +47,11 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //TODO Get the nif and the name by the email;
+        //TODO Get the nif and the name by the nif;
         Session session;
         try{
-            String text = getIntent().getExtras().getString("email");
-            session = new Session("", "", text);
+            String text = getIntent().getExtras().getString("nif");
+            session = new Session(text, "", "");
         }catch (Exception e){
             session = null;
         }

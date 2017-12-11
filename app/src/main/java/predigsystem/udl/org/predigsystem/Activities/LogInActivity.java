@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
+import predigsystem.udl.org.predigsystem.JavaClasses.Session;
 import predigsystem.udl.org.predigsystem.R;
 
 
@@ -19,6 +20,7 @@ public class LogInActivity extends AppCompatActivity {
     EditText user;
     EditText password;
     SQLiteDatabase db;
+    Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class LogInActivity extends AppCompatActivity {
 
 
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                intent.putExtra("email", user.getText().toString());
+                intent.putExtra("nif", user.getText().toString());
                 if (authorize(user, password)){
                     startActivity(intent);
                     finish();
@@ -56,7 +58,7 @@ public class LogInActivity extends AppCompatActivity {
         if (suser.equals(""))suser="''";
         if (spassword.equals(""))spassword="''";
 
-        Cursor consult = db.rawQuery("SELECT Email, Password FROM User WHERE Email='"+suser+"' AND Password='"+spassword+"';", null);
+        Cursor consult = db.rawQuery("SELECT Email, Password FROM User WHERE NIF='"+suser+"' AND Password='"+spassword+"';", null);
         if(consult.moveToFirst()) return true;
         else return false;
     }
