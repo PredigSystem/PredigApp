@@ -189,4 +189,5 @@ Some drugs that you take for another condition may increase blood pressure. Thes
         <item>0</item>
         <item>1</item>
     </string-array>
+    <string name="bp_not_saved">Could not save Blood Pressure measurement</string>
 </resources>

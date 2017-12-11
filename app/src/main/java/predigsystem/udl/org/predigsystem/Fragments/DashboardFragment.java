@@ -4,6 +4,7 @@ package predigsystem.udl.org.predigsystem.Fragments;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,23 +12,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,13 +37,25 @@ import java.util.Date;
 import java.util.List;
 
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
+import predigsystem.udl.org.predigsystem.Interfaces.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class DashboardFragment extends Fragment {
 
     protected LineChart chart;
+    private Call<BloodPressure> lastBP = null;
+    private Call<List<BloodPressure>> bpList;
+
+    List<Entry> entryList = new ArrayList<Entry>();
+    List<Entry> entryList2 = new ArrayList<Entry>();
+    List<BloodPressure> todayBP = new ArrayList<>();
+    List<BloodPressure> bloodPressureList;
+
 
 
     public DashboardFragment() {
@@ -64,84 +76,38 @@ public class DashboardFragment extends Fragment {
 
         chart = getActivity().findViewById(R.id.chart);
 
-        List<BloodPressure> bpList = new ArrayList<>();
+        getAPIInformation("uid123");
+        LastBPTask lastBPTask = new LastBPTask();
+        ListBPTask listBPTask = new ListBPTask();
 
-        PredigAppDB predigAppDB = new PredigAppDB(getContext(), "PredigAppDB", null, 1);
-        SQLiteDatabase db = predigAppDB.getWritableDatabase();
-        final Cursor cursor = db.rawQuery("SELECT * FROM BloodPressure", null);
+        lastBPTask.execute();
+        listBPTask.execute();
+    }
 
-        if (cursor != null) {
-            try {
-                if (cursor.moveToFirst()) {
-                    Float syst = cursor.getFloat(0);
-                    Float dias = cursor.getFloat(1);
-                    Float pulse = cursor.getFloat(2);
-                    Date date = new Date(cursor.getLong(3));
-
-                    BloodPressure b = new BloodPressure(syst, dias, pulse, date);
-                    bpList.add(b);
+    private void getAPIInformation(String user){
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(java.sql.Date.class, new JsonDeserializer<java.sql.Date>() {
+            @Override
+            public java.sql.Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    return new java.sql.Date(df.parse(json.getAsString()).getTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-            } finally {
-                cursor.close();
+                return null;
             }
-        }
+        });
+        Gson gson = gsonBuilder.create();
 
-        List<Entry> entryList = new ArrayList<Entry>();
-        List<Entry> entryList2 = new ArrayList<Entry>();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8080/predig/api/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        PredigAPIService service = retrofit.create(PredigAPIService.class);
 
-        BloodPressure lastBP = null;
-        Date lastDate = new Date(Long.MIN_VALUE);
-        List<BloodPressure> todayBP = new ArrayList<>();
-
-        for(BloodPressure b: bpList){
-            entryList.add(new Entry(b.getDateTaken().getTime(), b.getSystolic()));
-            entryList2.add(new Entry(b.getDateTaken().getTime(), b.getDiastolic()));
-
-            if(b.getDateTaken().after(lastDate)){
-                lastBP = b;
-                lastDate = b.getDateTaken();
-            }
-            if(isToday(b.getDateTaken())){
-                todayBP.add(b);
-            }
-        }
-
-        LineDataSet setComp1 = new LineDataSet(entryList, "Systolic");
-        setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
-        setComp1.setColor(R.color.accent);
-        LineDataSet setComp2 = new LineDataSet(entryList2, "Diastolic");
-        setComp2.setAxisDependency(YAxis.AxisDependency.LEFT);
-
-        List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-        dataSets.add(setComp1);
-        dataSets.add(setComp2);
-
-        LineData data = new LineData(dataSets);
-        chart.setData(data);
-        chart.invalidate();
-
-        if(lastBP != null){
-            ((TextView)getActivity().findViewById(R.id.lastSystolic)).setText("" + lastBP.getSystolic());
-            ((TextView)getActivity().findViewById(R.id.lastDiastolic)).setText("" + lastBP.getDiastolic());
-            ((TextView)getActivity().findViewById(R.id.lastPulse)).setText("" + lastBP.getPulse());
-        }
-
-        Float systolicMean = 0f, diastolicMean = 0f, pulseMean = 0f;
-        for(BloodPressure b: todayBP){
-            systolicMean += b.getSystolic();
-            diastolicMean += b.getDiastolic();
-            pulseMean += b.getPulse();
-        }
-
-        if(bpList.size() > 0){
-            systolicMean = systolicMean / bpList.size();
-            diastolicMean = diastolicMean / bpList.size();
-            pulseMean = pulseMean / bpList.size();
-
-            ((TextView)getActivity().findViewById(R.id.systolicMean)).setText("" + systolicMean);
-            ((TextView)getActivity().findViewById(R.id.diastolicMean)).setText("" + diastolicMean);
-            ((TextView)getActivity().findViewById(R.id.pulseMean)).setText("" + pulseMean);
-        }
+        lastBP = service.lastBloodPressureByUser(user);
+        bpList = service.bloodPressureByUser(user);
     }
 
     private boolean isToday(Date date){
@@ -157,5 +123,83 @@ public class DashboardFragment extends Fragment {
         int todayDay = cal.get(Calendar.DAY_OF_MONTH);
 
         return year == todayYear && month == todayMonth && day == todayDay;
+    }
+
+    private class LastBPTask extends AsyncTask<Void, Void, Void>{
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                BloodPressure bp = lastBP.execute().body();
+                if(bp != null){
+                    ((TextView)getActivity().findViewById(R.id.lastSystolic)).setText("" + bp.getSystolic());
+                    ((TextView)getActivity().findViewById(R.id.lastDiastolic)).setText("" + bp.getDiastolic());
+                    ((TextView)getActivity().findViewById(R.id.lastPulse)).setText("" + bp.getPulse());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    private class ListBPTask extends AsyncTask<Void, Void, Void>{
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                bloodPressureList = bpList.execute().body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                for(BloodPressure b: bloodPressureList){
+                    if(b.getDate() != null){
+                        entryList.add(new Entry(b.getDate().getTime(), b.getSystolic().floatValue()));
+                        entryList2.add(new Entry(b.getDate().getTime(), b.getDiastolic().floatValue()));
+                    }
+
+                    if(isToday(b.getDate())){
+                        todayBP.add(b);
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            Double systolicMean = 0.0, diastolicMean = 0.0, pulseMean = 0.0;
+            for(BloodPressure b: todayBP){
+                systolicMean += b.getSystolic();
+                diastolicMean += b.getDiastolic();
+                pulseMean += b.getPulse();
+            }
+
+            if(bloodPressureList.size() > 0){
+                systolicMean = systolicMean / bloodPressureList.size();
+                diastolicMean = diastolicMean / bloodPressureList.size();
+                pulseMean = pulseMean / bloodPressureList.size();
+
+                ((TextView)getActivity().findViewById(R.id.systolicMean)).setText("" + systolicMean);
+                ((TextView)getActivity().findViewById(R.id.diastolicMean)).setText("" + diastolicMean);
+                ((TextView)getActivity().findViewById(R.id.pulseMean)).setText("" + pulseMean);
+            }
+
+            LineDataSet setComp1 = new LineDataSet(entryList, "Systolic");
+            setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
+            setComp1.setColor(R.color.accent);
+            LineDataSet setComp2 = new LineDataSet(entryList2, "Diastolic");
+            setComp2.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+            List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+            dataSets.add(setComp1);
+            dataSets.add(setComp2);
+
+            LineData data = new LineData(dataSets);
+            chart.setData(data);
+            chart.invalidate();
+        }
     }
 }

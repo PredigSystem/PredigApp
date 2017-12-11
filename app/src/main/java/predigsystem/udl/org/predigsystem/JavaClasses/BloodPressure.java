@@ -1,60 +1,104 @@
 package predigsystem.udl.org.predigsystem.JavaClasses;
 
-import java.util.Date;
-
-/**
- * Created by Pau on 30/10/17.
- */
+import java.sql.Date;
+import java.util.UUID;
 
 public class BloodPressure {
-    private Float systolic;
-    private Float diastolic;
-    private Float pulse;
-    private Date dateTaken;
+    public String userId;
 
-    public BloodPressure(Float systolic, Float diastolic, Date dateTaken) {
-        this.systolic = systolic;
-        this.diastolic = diastolic;
-        this.dateTaken = dateTaken;
-        this.pulse = null;
+    public Date date;
+    public Double latitude;
+    public Double longitude;
+
+    public Double systolic;
+    public Double diastolic;
+    public Integer pulse;
+
+    public BloodPressure(){
+
     }
 
-    public BloodPressure(Float systolic, Float diastolic, Float pulse, Date dateTaken) {
+    public BloodPressure(String userId, Date date, Double latitude, Double longitude, Double systolic, Double diastolic, Integer pulse) {
+        this.userId = userId;
+        this.date = date;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.systolic = systolic;
         this.diastolic = diastolic;
         this.pulse = pulse;
-        this.dateTaken = dateTaken;
     }
 
-    public Float getSystolic() {
+    public String generateId(){
+        //random ID Generator
+        return UUID.randomUUID().toString().replace("-", "").toLowerCase();
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getSystolic() {
         return systolic;
     }
 
-    public void setSystolic(Float systolic) {
+    public void setSystolic(Double systolic) {
         this.systolic = systolic;
     }
 
-    public Float getDiastolic() {
+    public Double getDiastolic() {
         return diastolic;
     }
 
-    public void setDiastolic(Float diastolic) {
+    public void setDiastolic(Double diastolic) {
         this.diastolic = diastolic;
     }
 
-    public Date getDateTaken() {
-        return dateTaken;
-    }
-
-    public void setDateTaken(Date dateTaken) {
-        this.dateTaken = dateTaken;
-    }
-
-    public Float getPulse() {
+    public Integer getPulse() {
         return pulse;
     }
 
-    public void setPulse(Float pulse) {
+    public void setPulse(Integer pulse) {
         this.pulse = pulse;
+    }
+
+    @Override
+    public String toString() {
+        return "BloodPressure{" +
+                "userId='" + userId + '\'' +
+                ", date=" + date +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", systolic=" + systolic +
+                ", diastolic=" + diastolic +
+                ", pulse=" + pulse +
+                '}';
     }
 }

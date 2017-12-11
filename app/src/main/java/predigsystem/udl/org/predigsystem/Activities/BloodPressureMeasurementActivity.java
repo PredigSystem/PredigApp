@@ -16,13 +16,28 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
+import predigsystem.udl.org.predigsystem.Interfaces.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
 
 import predigsystem.udl.org.predigsystem.R;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static predigsystem.udl.org.predigsystem.Fragments.MapFragment.MY_PERMISSIONS_REQUEST_LOCATION;
 
@@ -40,7 +55,7 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_pressure_measurement);
 
-        bloodPressure = new BloodPressure(new Float(14.4), new Float(7.8), new Float(98),new Date());
+        bloodPressure = new BloodPressure("uid123", new java.sql.Date(new Date().getTime()), 11.0, 82.3, 12.3, 7.9, 80);
 
         userLocation = new Location("userLocation"); //Default Lleida
         userLocation.setLatitude(41.6183731);
@@ -52,7 +67,7 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveMeasureDataBase();
+                getAPIInformation("uid123", bloodPressure);
                 Intent intent2 = new Intent(getApplicationContext(), HistoryActivity.class);
                 startActivity(intent2);
                 finish();
@@ -60,14 +75,46 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
         });
     }
 
-    protected void saveMeasureDataBase(){
+    //TODO: Add local database
+    /*protected void saveMeasureDataBase(){
         PredigAppDB predigAppDB = new PredigAppDB(this, "PredigAppDB", null, 1);
         SQLiteDatabase db = predigAppDB.getWritableDatabase();
 
         if(db != null) {
-            db.execSQL("INSERT INTO BloodPressure (Systolic, Diastolic, Pulse, Date, Latitude, Longitude, nif) VALUES ('" +bloodPressure.getSystolic() +"', '"+bloodPressure.getDiastolic()+"', '"+bloodPressure.getPulse()+"', '"+bloodPressure.getDateTaken().getTime()+"', '"+userLocation.getLatitude()+"', '" + userLocation.getLongitude()+"', '00000000X')");
+            db.execSQL("INSERT INTO BloodPressure (Systolic, Diastolic, Pulse, Date, Latitude, Longitude, nif) VALUES ('" +bloodPressure.getSystolic() +"', '"+bloodPressure.getDiastolic()+"', '"+bloodPressure.getPulse()+"', '"+bloodPressure.getDate().getTime()+"', '"+userLocation.getLatitude()+"', '" + userLocation.getLongitude()+"', '00000000X')");
+        }
+    }*/
+
+    private void getAPIInformation(String user, BloodPressure bloodPressure){
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(java.sql.Date.class, new JsonDeserializer<java.sql.Date>() {
+            @Override
+            public java.sql.Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    return new java.sql.Date(df.parse(json.getAsString()).getTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        });
+        Gson gson = gsonBuilder.create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8080/predig/api/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        PredigAPIService service = retrofit.create(PredigAPIService.class);
+
+        try {
+            service.newBloodPressureToUser(user, bloodPressure).execute();
+        } catch (IOException e) {
+            Toast.makeText(this, R.string.bp_not_saved, Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
     }
+
 
     public void getUserLocation () {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
