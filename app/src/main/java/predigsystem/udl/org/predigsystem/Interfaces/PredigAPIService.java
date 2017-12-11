@@ -21,7 +21,7 @@ public interface PredigAPIService {
     @GET("bloodPressure/{user}/last")
     Call<BloodPressure> lastBloodPressureByUser(@Path("user") String user);
 
-    @POST("bloodPressure/{user}")
-    Call<BloodPressure> newBloodPressureToUser(@Path("user") String user, @Body BloodPressure bloodPressure);
+    @POST("bloodPressure")
+    Call<BloodPressure> newBloodPressureToUser(@Body BloodPressure bloodPressure);
 
 }

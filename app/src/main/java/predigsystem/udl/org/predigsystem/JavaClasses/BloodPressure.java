@@ -6,7 +6,7 @@ import java.util.UUID;
 public class BloodPressure {
     public String userId;
 
-    public Date date;
+    public Long date;
     public Double latitude;
     public Double longitude;
 
@@ -18,7 +18,7 @@ public class BloodPressure {
 
     }
 
-    public BloodPressure(String userId, Date date, Double latitude, Double longitude, Double systolic, Double diastolic, Integer pulse) {
+    public BloodPressure(String userId, Long date, Double latitude, Double longitude, Double systolic, Double diastolic, Integer pulse) {
         this.userId = userId;
         this.date = date;
         this.latitude = latitude;
@@ -41,11 +41,11 @@ public class BloodPressure {
         this.userId = userId;
     }
 
-    public Date getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 

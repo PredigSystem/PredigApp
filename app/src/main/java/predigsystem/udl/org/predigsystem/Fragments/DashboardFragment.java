@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -41,6 +42,8 @@ import predigsystem.udl.org.predigsystem.Interfaces.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -77,11 +80,51 @@ public class DashboardFragment extends Fragment {
         chart = getActivity().findViewById(R.id.chart);
 
         getAPIInformation("uid123");
-        LastBPTask lastBPTask = new LastBPTask();
-        ListBPTask listBPTask = new ListBPTask();
 
-        lastBPTask.execute();
-        listBPTask.execute();
+        lastBP.enqueue(new Callback<BloodPressure>() {
+            @Override
+            public void onResponse(Call<BloodPressure> call, Response<BloodPressure> response) {
+                BloodPressure bp = response.body();
+                if(bp != null){
+                    ((TextView)getActivity().findViewById(R.id.lastSystolic)).setText("" + bp.getSystolic());
+                    ((TextView)getActivity().findViewById(R.id.lastDiastolic)).setText("" + bp.getDiastolic());
+                    ((TextView)getActivity().findViewById(R.id.lastPulse)).setText("" + bp.getPulse());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BloodPressure> call, Throwable t) {
+                Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        bpList.enqueue(new Callback<List<BloodPressure>>() {
+            @Override
+            public void onResponse(Call<List<BloodPressure>> call, Response<List<BloodPressure>> response) {
+                bloodPressureList = response.body();
+                try{
+                    for(BloodPressure b: bloodPressureList){
+                        if(b.getDate() != null){
+                            entryList.add(new Entry(b.getDate(), b.getSystolic().floatValue()));
+                            entryList2.add(new Entry(b.getDate(), b.getDiastolic().floatValue()));
+                        }
+
+                        if(isToday(b.getDate())){
+                            todayBP.add(b);
+                        }
+                    }
+                }catch (Exception e){
+                    Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
+                }
+
+                buildChart();
+            }
+
+            @Override
+            public void onFailure(Call<List<BloodPressure>> call, Throwable t) {
+                Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void getAPIInformation(String user){
@@ -110,7 +153,8 @@ public class DashboardFragment extends Fragment {
         bpList = service.bloodPressureByUser(user);
     }
 
-    private boolean isToday(Date date){
+    private boolean isToday(Long time){
+        Date date = new Date(time);
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int year = cal.get(Calendar.YEAR);
@@ -125,81 +169,36 @@ public class DashboardFragment extends Fragment {
         return year == todayYear && month == todayMonth && day == todayDay;
     }
 
-    private class LastBPTask extends AsyncTask<Void, Void, Void>{
-
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                BloodPressure bp = lastBP.execute().body();
-                if(bp != null){
-                    ((TextView)getActivity().findViewById(R.id.lastSystolic)).setText("" + bp.getSystolic());
-                    ((TextView)getActivity().findViewById(R.id.lastDiastolic)).setText("" + bp.getDiastolic());
-                    ((TextView)getActivity().findViewById(R.id.lastPulse)).setText("" + bp.getPulse());
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
-
-    private class ListBPTask extends AsyncTask<Void, Void, Void>{
-
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                bloodPressureList = bpList.execute().body();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                for(BloodPressure b: bloodPressureList){
-                    if(b.getDate() != null){
-                        entryList.add(new Entry(b.getDate().getTime(), b.getSystolic().floatValue()));
-                        entryList2.add(new Entry(b.getDate().getTime(), b.getDiastolic().floatValue()));
-                    }
-
-                    if(isToday(b.getDate())){
-                        todayBP.add(b);
-                    }
-                }
-            }
-            return null;
+    private void buildChart(){
+        Double systolicMean = 0.0, diastolicMean = 0.0, pulseMean = 0.0;
+        for(BloodPressure b: todayBP){
+            systolicMean += b.getSystolic();
+            diastolicMean += b.getDiastolic();
+            pulseMean += b.getPulse();
         }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            Double systolicMean = 0.0, diastolicMean = 0.0, pulseMean = 0.0;
-            for(BloodPressure b: todayBP){
-                systolicMean += b.getSystolic();
-                diastolicMean += b.getDiastolic();
-                pulseMean += b.getPulse();
-            }
+        if(bloodPressureList.size() > 0){
+            systolicMean = systolicMean / bloodPressureList.size();
+            diastolicMean = diastolicMean / bloodPressureList.size();
+            pulseMean = pulseMean / bloodPressureList.size();
 
-            if(bloodPressureList.size() > 0){
-                systolicMean = systolicMean / bloodPressureList.size();
-                diastolicMean = diastolicMean / bloodPressureList.size();
-                pulseMean = pulseMean / bloodPressureList.size();
-
-                ((TextView)getActivity().findViewById(R.id.systolicMean)).setText("" + systolicMean);
-                ((TextView)getActivity().findViewById(R.id.diastolicMean)).setText("" + diastolicMean);
-                ((TextView)getActivity().findViewById(R.id.pulseMean)).setText("" + pulseMean);
-            }
-
-            LineDataSet setComp1 = new LineDataSet(entryList, "Systolic");
-            setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
-            setComp1.setColor(R.color.accent);
-            LineDataSet setComp2 = new LineDataSet(entryList2, "Diastolic");
-            setComp2.setAxisDependency(YAxis.AxisDependency.LEFT);
-
-            List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-            dataSets.add(setComp1);
-            dataSets.add(setComp2);
-
-            LineData data = new LineData(dataSets);
-            chart.setData(data);
-            chart.invalidate();
+            ((TextView)getActivity().findViewById(R.id.systolicMean)).setText("" + systolicMean);
+            ((TextView)getActivity().findViewById(R.id.diastolicMean)).setText("" + diastolicMean);
+            ((TextView)getActivity().findViewById(R.id.pulseMean)).setText("" + pulseMean);
         }
+
+        LineDataSet setComp1 = new LineDataSet(entryList, "Systolic");
+        setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        setComp1.setColor(R.color.accent);
+        LineDataSet setComp2 = new LineDataSet(entryList2, "Diastolic");
+        setComp2.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+        List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+        dataSets.add(setComp1);
+        dataSets.add(setComp2);
+
+        LineData data = new LineData(dataSets);
+        chart.setData(data);
+        chart.invalidate();
     }
 }

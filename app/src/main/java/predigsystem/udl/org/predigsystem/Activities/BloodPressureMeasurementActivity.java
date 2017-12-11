@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
@@ -19,23 +20,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
@@ -44,6 +34,9 @@ import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
 
 import predigsystem.udl.org.predigsystem.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -55,15 +48,14 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
     BloodPressure bloodPressure;
     private FusedLocationProviderClient mFusedLocationClient;
     private Location userLocation;
-
-
+    PredigAPIService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_pressure_measurement);
 
-        bloodPressure = new BloodPressure("uid123", new java.sql.Date(new Date().getTime()), 11.0, 82.3, 12.3, 7.9, 80);
+        bloodPressure = new BloodPressure("uid123", new Date().getTime(), 11.0, 82.3, 12.3, 7.9, 80);
 
         userLocation = new Location("userLocation"); //Default Lleida
         userLocation.setLatitude(41.6183731);
@@ -96,33 +88,24 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
     }*/
 
     private void getAPIInformation(String user, BloodPressure bloodPressure){
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(java.sql.Date.class, new JsonDeserializer<java.sql.Date>() {
-            @Override
-            public java.sql.Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    return new java.sql.Date(df.parse(json.getAsString()).getTime());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        });
-        Gson gson = gsonBuilder.create();
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/predig/api/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        PredigAPIService service = retrofit.create(PredigAPIService.class);
+        service = retrofit.create(PredigAPIService.class);
+        service.newBloodPressureToUser(bloodPressure).enqueue(new Callback<BloodPressure>() {
+            @Override
+            public void onResponse(Call<BloodPressure> call, Response<BloodPressure> response) {
+                BloodPressure bP = response.body();
+                if(bP != null) Toast.makeText(getApplicationContext(), R.string.bp_saved, Toast.LENGTH_SHORT).show();
+                else Toast.makeText(getApplicationContext(), R.string.bp_not_saved, Toast.LENGTH_SHORT).show();
+            }
 
-        try {
-            service.newBloodPressureToUser(user, bloodPressure).execute();
-        } catch (IOException e) {
-            Toast.makeText(this, R.string.bp_not_saved, Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
+            @Override
+            public void onFailure(Call<BloodPressure> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), R.string.bp_not_saved, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
