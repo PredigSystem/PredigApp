@@ -135,7 +135,7 @@ public class CalendarFragment extends Fragment{
     }
 
     private void getAPIInformation(String user){
-        PredigAPIService service = APIConnector.getConnectionWithGson()
+        PredigAPIService service = APIConnector.getConnectionWithGson();
 
         nextVisit = service.lastVisitsDoctorByUser(user);
         visitsList = service.visitsDoctorByUser(user);
