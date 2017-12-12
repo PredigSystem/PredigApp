@@ -1,8 +1,5 @@
 package predigsystem.udl.org.predigsystem.JavaClasses;
 
-import java.sql.Date;
-import java.util.UUID;
-
 public class BloodPressure {
     public String userId;
 
@@ -26,11 +23,6 @@ public class BloodPressure {
         this.systolic = systolic;
         this.diastolic = diastolic;
         this.pulse = pulse;
-    }
-
-    public String generateId(){
-        //random ID Generator
-        return UUID.randomUUID().toString().replace("-", "").toLowerCase();
     }
 
     public String getUserId() {

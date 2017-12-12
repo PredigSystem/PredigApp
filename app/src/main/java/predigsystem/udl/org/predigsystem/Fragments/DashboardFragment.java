@@ -1,10 +1,6 @@
 package predigsystem.udl.org.predigsystem.Fragments;
 
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,7 +23,6 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -37,8 +32,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
-import predigsystem.udl.org.predigsystem.Interfaces.PredigAPIService;
+import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
 import retrofit2.Call;

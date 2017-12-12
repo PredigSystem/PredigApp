@@ -1,8 +1,10 @@
-package predigsystem.udl.org.predigsystem.Interfaces;
+package predigsystem.udl.org.predigsystem.Api;
 
 import java.util.List;
 
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
+import predigsystem.udl.org.predigsystem.JavaClasses.LogIn;
+import predigsystem.udl.org.predigsystem.JavaClasses.UserID;
 import predigsystem.udl.org.predigsystem.JavaClasses.VisitsDoctor;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -31,4 +33,6 @@ public interface PredigAPIService {
     @GET("visitsDoctor/{user}/last")
     Call<VisitsDoctor> lastVisitsDoctorByUser(@Path("user") String user);
 
+    @POST("user/logIn")
+    Call<UserID> logIn(@Body LogIn logIn);
 }

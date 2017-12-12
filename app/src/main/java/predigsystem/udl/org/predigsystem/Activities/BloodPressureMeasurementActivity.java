@@ -1,18 +1,15 @@
 package predigsystem.udl.org.predigsystem.Activities;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
@@ -20,7 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -28,12 +24,10 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import java.util.Date;
 
-import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
-import predigsystem.udl.org.predigsystem.Interfaces.PredigAPIService;
+import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
 
-import predigsystem.udl.org.predigsystem.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -55,7 +49,7 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blood_pressure_measurement);
 
-        bloodPressure = new BloodPressure("uid123", new Date().getTime(), 11.0, 82.3, 12.3, 7.9, 80);
+        bloodPressure = new BloodPressure("uid123", new Date().getTime(), 13.0, 81.3, 11.3, 8.9, 89);
 
         userLocation = new Location("userLocation"); //Default Lleida
         userLocation.setLatitude(41.6183731);
