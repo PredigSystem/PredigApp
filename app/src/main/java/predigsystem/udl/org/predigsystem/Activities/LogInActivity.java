@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import predigsystem.udl.org.predigsystem.Api.APIConnector;
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
 import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.LogIn;
@@ -58,11 +59,7 @@ public class LogInActivity extends AppCompatActivity {
         String spassword = ppassword.getText().toString();
         LogIn logIn = new LogIn(suser, spassword);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/predig/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        PredigAPIService service = retrofit.create(PredigAPIService.class);
+        PredigAPIService service = APIConnector.getConnection();
 
         service.logIn(logIn).enqueue(new Callback<UserID>() {
             @Override

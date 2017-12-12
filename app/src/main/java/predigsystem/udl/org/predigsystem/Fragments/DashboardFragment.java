@@ -32,6 +32,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import predigsystem.udl.org.predigsystem.Api.APIConnector;
 import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
@@ -122,26 +123,7 @@ public class DashboardFragment extends Fragment {
     }
 
     private void getAPIInformation(String user){
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(java.sql.Date.class, new JsonDeserializer<java.sql.Date>() {
-            @Override
-            public java.sql.Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    return new java.sql.Date(df.parse(json.getAsString()).getTime());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        });
-        Gson gson = gsonBuilder.create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/predig/api/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        PredigAPIService service = retrofit.create(PredigAPIService.class);
+        PredigAPIService service = APIConnector.getConnectionWithGson();
 
         lastBP = service.lastBloodPressureByUser(user);
         bpList = service.bloodPressureByUser(user);
@@ -171,7 +153,7 @@ public class DashboardFragment extends Fragment {
             pulseMean += b.getPulse();
         }
 
-        if(bloodPressureList.size() > 0){
+        if(bloodPressureList!= null && bloodPressureList.size() > 0){
             systolicMean = systolicMean / bloodPressureList.size();
             diastolicMean = diastolicMean / bloodPressureList.size();
             pulseMean = pulseMean / bloodPressureList.size();

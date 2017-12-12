@@ -32,8 +32,6 @@ import pl.rafman.scrollcalendar.contract.MonthScrollListener;
 import pl.rafman.scrollcalendar.contract.OnDateClickListener;
 import pl.rafman.scrollcalendar.data.CalendarDay;
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
-import predigsystem.udl.org.predigsystem.Interfaces.PredigAPIService;
-import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.VisitsDoctor;
 import predigsystem.udl.org.predigsystem.R;

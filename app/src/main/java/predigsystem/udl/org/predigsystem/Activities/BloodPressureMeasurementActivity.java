@@ -24,6 +24,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import java.util.Date;
 
+import predigsystem.udl.org.predigsystem.Api.APIConnector;
 import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
@@ -82,11 +83,7 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
     }*/
 
     private void getAPIInformation(String user, BloodPressure bloodPressure){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/predig/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        service = retrofit.create(PredigAPIService.class);
+        service = APIConnector.getConnection();
         service.newBloodPressureToUser(bloodPressure).enqueue(new Callback<BloodPressure>() {
             @Override
             public void onResponse(Call<BloodPressure> call, Response<BloodPressure> response) {
