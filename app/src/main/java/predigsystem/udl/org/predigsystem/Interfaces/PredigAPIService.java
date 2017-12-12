@@ -3,6 +3,7 @@ package predigsystem.udl.org.predigsystem.Interfaces;
 import java.util.List;
 
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
+import predigsystem.udl.org.predigsystem.JavaClasses.VisitsDoctor;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -23,5 +24,11 @@ public interface PredigAPIService {
 
     @POST("bloodPressure")
     Call<BloodPressure> newBloodPressureToUser(@Body BloodPressure bloodPressure);
+
+    @GET("visitsDoctor/{user}")
+    Call<List<VisitsDoctor>> visitsDoctorByUser(@Path("user") String user);
+
+    @GET("visitsDoctor/{user}/last")
+    Call<VisitsDoctor> lastVisitsDoctorByUser(@Path("user") String user);
 
 }
