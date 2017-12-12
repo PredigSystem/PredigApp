@@ -31,6 +31,7 @@ import pl.rafman.scrollcalendar.contract.DateWatcher;
 import pl.rafman.scrollcalendar.contract.MonthScrollListener;
 import pl.rafman.scrollcalendar.contract.OnDateClickListener;
 import pl.rafman.scrollcalendar.data.CalendarDay;
+import predigsystem.udl.org.predigsystem.Api.APIConnector;
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
 import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.VisitsDoctor;
@@ -134,26 +135,7 @@ public class CalendarFragment extends Fragment{
     }
 
     private void getAPIInformation(String user){
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(java.sql.Date.class, new JsonDeserializer<Date>() {
-            @Override
-            public java.sql.Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    return new java.sql.Date(df.parse(json.getAsString()).getTime());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        });
-        Gson gson = gsonBuilder.create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/predig/api/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        PredigAPIService service = retrofit.create(PredigAPIService.class);
+        PredigAPIService service = APIConnector.getConnectionWithGson()
 
         nextVisit = service.lastVisitsDoctorByUser(user);
         visitsList = service.visitsDoctorByUser(user);
