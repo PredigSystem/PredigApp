@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -30,10 +32,14 @@ import pl.rafman.scrollcalendar.contract.MonthScrollListener;
 import pl.rafman.scrollcalendar.contract.OnDateClickListener;
 import pl.rafman.scrollcalendar.data.CalendarDay;
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
+import predigsystem.udl.org.predigsystem.Interfaces.PredigAPIService;
+import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.VisitsDoctor;
 import predigsystem.udl.org.predigsystem.R;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -67,6 +73,23 @@ public class CalendarFragment extends Fragment{
 
         getVisits("00000000X");
         getAPIInformation("uid123");
+
+        nextVisit.enqueue(new Callback<VisitsDoctor>() {
+            @Override
+            public void onResponse(Call<VisitsDoctor> call, Response<VisitsDoctor> response) {
+                //Toast.makeText(getContext(), "Calendar", Toast.LENGTH_SHORT).show();
+                VisitsDoctor vd = response.body();
+                if(vd != null){
+                    Toast.makeText(getContext(), vd.getDate().toString() + " - " + vd.getTime().toString(), Toast.LENGTH_LONG).show();
+                    //((TextView)getActivity().findViewById(R.id.lastPulse)).setText("" + bp.getPulse());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VisitsDoctor> call, Throwable t) {
+                Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         ScrollCalendar scrollCalendar = (ScrollCalendar) getActivity().findViewById(R.id.scrollCalendar);
         scrollCalendar.setOnDateClickListener(new OnDateClickListener() {
