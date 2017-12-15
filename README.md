@@ -12,7 +12,7 @@ More information about the System Requirements can be found [here](https://www.d
 Website template can be found [here](https://github.com/PredigSystem/PredigWebApp-prototype). Check out the [demo](https://predigsystem-webapp.herokuapp.com/login.html)
 
 ## Screenshots
-![alt text](https://www.dropbox.com/s/eaehrwue2w92w6g/1.jpg?raw=1)
+![alt text](https://www.dropbox.com/home/BP%20App?preview=1.jpg)
 
 ![alt text](https://www.dropbox.com/s/y2sg28jwa2697qp/2.jpg?raw=1)
 
