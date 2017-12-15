@@ -17,6 +17,12 @@ Website template can be found [here](https://github.com/PredigSystem/PredigWebAp
 
 ![alt text](https://www.dropbox.com/s/71yycsrb3016fk0/2.jpg?raw=1)
 
+![alt text](https://www.dropbox.com/s/r43v3od5s90vxgk/3.jpg?raw=1)
+
+![alt text](https://www.dropbox.com/s/crrph0pzunw4enq/4.jpg?raw=1)
+
+![alt text](https://www.dropbox.com/s/wp4pxghol4abmn8/5.jpg?raw=1)
+
 
 ## Getting Started
 
