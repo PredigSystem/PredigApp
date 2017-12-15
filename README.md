@@ -13,9 +13,8 @@ Website template can be found [here](https://github.com/PredigSystem/PredigWebAp
 
 ## Screenshots
 
-![alt text](https://www.dropbox.com/s/faxw8kzhntcl5o1/1.jpg?dl=0)
+![alt text](https://www.dropbox.com/s/faxw8kzhntcl5o1/1.jpg?raw=1)
 
-![alt text](https://www.dropbox.com/s/y2sg28jwa2697qp/2.jpg?raw=1)
 
 ## Getting Started
 
