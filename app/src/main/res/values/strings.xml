@@ -192,4 +192,10 @@ Some drugs that you take for another condition may increase blood pressure. Thes
     <string name="bp_not_saved">Could not save Blood Pressure measurement</string>
     <string name="bp_saved">Blood Pressure measurement saved!</string>
     <string name="api_fail">Network error!</string>
+    <string name="doctor"> Doctor </string>
+    <string name="hour"> Hour </string>
+    <string name="day"> Day </string>
+    <string name="reason"> Reason </string>
+    <string name="NextVisit"> Next visit </string>
+
 </resources>

@@ -25,26 +25,35 @@ import com.roughike.bottombar.OnTabSelectListener;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import predigsystem.udl.org.predigsystem.Activities.BTConnectionActivity;
 import predigsystem.udl.org.predigsystem.Activities.BloodPressureMeasurementActivity;
 import predigsystem.udl.org.predigsystem.Activities.HistoryActivity;
+import predigsystem.udl.org.predigsystem.Api.APIConnector;
+import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
+import predigsystem.udl.org.predigsystem.JavaClasses.VisitsDoctor;
 import predigsystem.udl.org.predigsystem.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class HomeFragment extends Fragment {
 
+    private Call<VisitsDoctor> nextVisit = null;
+
+
     public HomeFragment() {
     }
 
-    DateFormat formatDateTime = DateFormat.getDateTimeInstance();
     Calendar dateTime = Calendar.getInstance();
     private TextView text;
-    private Button btn_date;
-    private Button btn_time;
     SQLiteDatabase db;
+    VisitsDoctor vd = null;
+
 
     @Nullable
     @Override
@@ -60,8 +69,6 @@ public class HomeFragment extends Fragment {
         db = predigAppDB.getReadableDatabase();
 
         text = (TextView) getActivity().findViewById(R.id.txt_TextDateTime);
-        //btn_date = (Button)getActivity().findViewById(R.id.btn_datePicker);
-        //btn_time = (Button)getActivity().findViewById(R.id.btn_timePicker);
 
         Button btn = getActivity().findViewById(R.id.btn_start);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -91,33 +98,33 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        /*btn_date.setOnClickListener(new View.OnClickListener() {
+        updateTextLabel();
+
+        nextVisit.enqueue(new Callback<VisitsDoctor>() {
             @Override
-            public void onClick(View v) {
-                updateDate();
+            public void onResponse(Call<VisitsDoctor> call, Response<VisitsDoctor> response) {
+                vd = response.body();
+                if(vd != null){
+                    //Toast.makeText(getContext(), vd.getDate().toString(), Toast.LENGTH_LONG).show();
+                    printVisit();
+                }
+                else {
+                    text.setText("No visit");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VisitsDoctor> call, Throwable t) {
+                Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
             }
         });
 
-        btn_time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateTime();
-            }
-        });*/
-
-        updateTextLabel();
     }
 
-    private void updateDate(){
-        new DatePickerDialog(this.getContext(), d, dateTime.get(Calendar.YEAR),dateTime.get(Calendar.MONTH),dateTime.get(Calendar.DAY_OF_MONTH)).show();
-    }
-
-    private void updateTime(){
-        new TimePickerDialog(this.getContext(), t, dateTime.get(Calendar.HOUR_OF_DAY), dateTime.get(Calendar.MINUTE), true).show();
-    }
 
     private void updateTextLabel(){
         getLastDate("00000000X");
+        getVisitInformationApi("uid123");
         //text.setText(formatDateTime.format(dateTime.getTime()));
     }
 
@@ -146,5 +153,20 @@ public class HomeFragment extends Fragment {
             text.setText("Day: "+consult.getString(1) + "- Hour: " +consult.getString(2));
         }else {text.setText("No visit");}
     }
+
+    protected void getVisitInformationApi(String user) {
+        PredigAPIService service = APIConnector.getConnectionWithGson();
+
+        nextVisit = service.lastVisitsDoctorByUser(user);
+    }
+
+    protected void printVisit() {
+        Date date = new Date(vd.getDate());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        String dateStr = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)) + "/" + String.valueOf(calendar.get(Calendar.MONTH)) + "/" + String.valueOf(calendar.get(Calendar.YEAR));
+        text.setText("Day: " + dateStr + " Hour: " + vd.getTime());
+    }
+
 }
 

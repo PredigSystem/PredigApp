@@ -203,4 +203,11 @@ Si la seva pressió arterial és extremadament alta, és possible que tingui mal
         <item>1</item>
     </string-array>
     <string name="api_fail">Error de xarxa!</string>
+
+    <string name="doctor"> Doctor </string>
+    <string name="hour"> Hora </string>
+    <string name="day"> Dia </string>
+    <string name="Reason"> Motiu </string>
+    <string name="NextVisit"> Següent visita </string>
+
 </resources>

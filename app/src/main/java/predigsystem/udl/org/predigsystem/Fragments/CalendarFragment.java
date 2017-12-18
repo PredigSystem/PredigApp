@@ -1,10 +1,14 @@
 package predigsystem.udl.org.predigsystem.Fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +29,8 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import pl.rafman.scrollcalendar.ScrollCalendar;
@@ -51,6 +57,8 @@ public class CalendarFragment extends Fragment{
     SQLiteDatabase db;
     private Call<VisitsDoctor> nextVisit = null;
     private Call<List<VisitsDoctor>> visitsList;
+    private VisitsDoctor vd = null;
+    CalendarView calendarView = null;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -71,6 +79,8 @@ public class CalendarFragment extends Fragment{
         PredigAppDB predigAppDB = new PredigAppDB(getActivity(), "PredigAppDB", null, 1);
         db = predigAppDB.getReadableDatabase();
 
+        calendarView = (CalendarView) getActivity().findViewById(R.id.calendar);
+
         getVisits("00000000X");
         getAPIInformation("uid123");
 
@@ -78,7 +88,7 @@ public class CalendarFragment extends Fragment{
         nextVisit.enqueue(new Callback<VisitsDoctor>() {
             @Override
             public void onResponse(Call<VisitsDoctor> call, Response<VisitsDoctor> response) {
-                VisitsDoctor vd = response.body();
+                vd = response.body();
                 if(vd != null){
                     //Toast.makeText(getContext(), vd.getDate().toString(), Toast.LENGTH_LONG).show();
                     addVisit(vd.getDate());
@@ -93,6 +103,13 @@ public class CalendarFragment extends Fragment{
             }
         });
 
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                Date date = new Date(year-1900, month, dayOfMonth);
+                showDate(date.toString());
+            }
+        });
     }
 
     public void getVisits (String nif) {
@@ -114,7 +131,30 @@ public class CalendarFragment extends Fragment{
     }
 
     public void addVisit(Long visit) {
-        CalendarView calendarView = (CalendarView) getActivity().findViewById(R.id.calendar);
         calendarView.setDate(visit);
+        //Date date = new Date(visit);
+    }
+
+    public void showDate (String date) {
+
+        String userDate = new Date(vd.getDate()).toString();
+        if(date.equals(userDate))
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setCancelable(true);
+            builder.setTitle("Next visit");
+
+            builder.setMessage(getString(R.string.doctor) + ": " + vd.getDoctor() + "\n" + getString(R.string.hour) + ": " + vd.getTime() + "\n" + getString(R.string.reason) +": " + vd.getReason() );
+
+            builder.setPositiveButton("Return",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 }
