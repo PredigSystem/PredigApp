@@ -6,14 +6,14 @@
     android:orientation="vertical"
     tools:context="predigsystem.udl.org.predigsystem.Fragments.CalendarFragment">
 
-    <!--<CalendarView
+    <CalendarView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/calendar">
 
-    </CalendarView>-->
+    </CalendarView>
 
-    <pl.rafman.scrollcalendar.ScrollCalendar
+    <!--<pl.rafman.scrollcalendar.ScrollCalendar
         android:id="@+id/scrollCalendar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -32,6 +32,6 @@
         scrollcalendar:selectedBackgroundMiddle="@drawable/scrollcalendar_range_middle"
         scrollcalendar:selectedTextColor="@android:color/white"
         scrollcalendar:unavailableBackground="@drawable/scrollcalendar_strikethrough"
-        scrollcalendar:unavailableTextColor="@android:color/darker_gray" />
+        scrollcalendar:unavailableTextColor="@android:color/darker_gray" />-->
 
 </LinearLayout>

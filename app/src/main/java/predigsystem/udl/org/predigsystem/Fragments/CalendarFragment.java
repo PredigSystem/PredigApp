@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,14 +74,16 @@ public class CalendarFragment extends Fragment{
         getVisits("00000000X");
         getAPIInformation("uid123");
 
+
         nextVisit.enqueue(new Callback<VisitsDoctor>() {
             @Override
             public void onResponse(Call<VisitsDoctor> call, Response<VisitsDoctor> response) {
-                //Toast.makeText(getContext(), "Calendar", Toast.LENGTH_SHORT).show();
                 VisitsDoctor vd = response.body();
                 if(vd != null){
-                    Toast.makeText(getContext(), vd.getDate().toString() + " - " + vd.getTime().toString(), Toast.LENGTH_LONG).show();
-                    //((TextView)getActivity().findViewById(R.id.lastPulse)).setText("" + bp.getPulse());
+                    //Toast.makeText(getContext(), vd.getDate().toString(), Toast.LENGTH_LONG).show();
+                    addVisit(vd.getDate());
+                }
+                else {
                 }
             }
 
@@ -90,36 +93,6 @@ public class CalendarFragment extends Fragment{
             }
         });
 
-        ScrollCalendar scrollCalendar = (ScrollCalendar) getActivity().findViewById(R.id.scrollCalendar);
-        scrollCalendar.setOnDateClickListener(new OnDateClickListener() {
-            @Override
-            public void onCalendarDayClicked(int year, int month, int day) {
-                // user clicked on a specific date on the calendar
-            }
-        });
-        scrollCalendar.setDateWatcher(new DateWatcher() {
-            @Override
-            public int getStateForDate(int year, int month, int day) {
-                //    CalendarDay.DEFAULT,
-                //    CalendarDay.DISABLED,
-                //    CalendarDay.TODAY,
-                //    CalendarDay.UNAVAILABLE,
-                //    CalendarDay.SELECTED,
-                return CalendarDay.DEFAULT;
-            }
-        });
-        scrollCalendar.setMonthScrollListener(new MonthScrollListener() {
-            @Override
-            public boolean shouldAddNextMonth(int lastDisplayedYear, int lastDisplayedMonth) {
-                // return false if you don't want to show later months
-                return true;
-            }
-            @Override
-            public boolean shouldAddPreviousMonth(int firstDisplayedYear, int firstDisplayedMonth) {
-                // return false if you don't want to show previous months
-                return true;
-            }
-        });
     }
 
     public void getVisits (String nif) {
@@ -129,7 +102,6 @@ public class CalendarFragment extends Fragment{
             do {
                 String date = consult.getString(0);
                 String time = consult.getString(1);
-                System.out.println(date + " " + time);
             }while(consult.moveToNext());
 
     }
@@ -139,5 +111,10 @@ public class CalendarFragment extends Fragment{
 
         nextVisit = service.lastVisitsDoctorByUser(user);
         visitsList = service.visitsDoctorByUser(user);
+    }
+
+    public void addVisit(Long visit) {
+        CalendarView calendarView = (CalendarView) getActivity().findViewById(R.id.calendar);
+        calendarView.setDate(visit);
     }
 }
