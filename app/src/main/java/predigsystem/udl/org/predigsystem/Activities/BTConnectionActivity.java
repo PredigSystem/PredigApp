@@ -8,10 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.smartlinklib.MainActivity;
 import com.ihealth.communication.manager.iHealthDevicesManager;
 import com.ihealth.communication.manager.iHealthDevicesCallback;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
+
+import java.util.Map;
 
 import predigsystem.udl.org.predigsystem.R;
 
@@ -56,7 +59,7 @@ public class BTConnectionActivity extends AppCompatActivity {
         iHealthDevicesManager.getInstance().sdkUserInAuthor(BTConnectionActivity.this, userName, clientId, clientSecret, callbackId);
 
         if(bluetoothReady) {
-            int type = iHealthDevicesManager.DISCOVERY_BP5;
+            long type = iHealthDevicesManager.DISCOVERY_BP5;
             iHealthDevicesManager.getInstance().startDiscovery(type);
         } else {
             Toast.makeText(this,"Bluetooth is not ready!", Toast.LENGTH_SHORT).show();
@@ -66,21 +69,41 @@ public class BTConnectionActivity extends AppCompatActivity {
     private iHealthDevicesCallback iHealthDevicesCallback = new iHealthDevicesCallback() {
 
         @Override
-        public void onScanDevice(String mac, String deviceType) {
-            /*if (selectedDeviceType.equals(deviceType)) {
-                iHealthDevicesManager.getInstance().stopDiscovery();
-                iHealthDevicesManager.getInstance().connectDevice(userName, mac);
-            }*/
+        public void onScanDevice(String mac, String deviceType, int rssi) {
+            super.onScanDevice(mac, deviceType, rssi);
+            onScanDevice(mac, deviceType);
         }
 
         @Override
+        public void onScanDevice(String mac, String deviceType, int rssi, Map manufactorData) {
+            super.onScanDevice(mac, deviceType, rssi, manufactorData);
+            onScanDevice(mac, deviceType);
+        }
+
+        @Override
+        public void onDeviceConnectionStateChange(String mac, String deviceType, int status, int errorID) {
+            super.onDeviceConnectionStateChange(mac, deviceType, status, errorID);
+        }
+
+        @Override
+        public void onDeviceConnectionStateChange(String mac, String deviceType, int status, int errorID, Map manufactorData) {
+            super.onDeviceConnectionStateChange(mac, deviceType, status, errorID, manufactorData);
+        }
+
+        private void onScanDevice(String mac, String deviceType) {
+            if (selectedDeviceType.equals(deviceType)) {
+                iHealthDevicesManager.getInstance().stopDiscovery();
+                iHealthDevicesManager.getInstance().connectDevice(userName, mac);
+            }
+        }
+
         public void onDeviceConnectionStateChange(String mac, String deviceType, int status) {
-            /*if (selectedDeviceType.equals(deviceType) && status==1) {
-                Intent intent = new Intent();
+            if (selectedDeviceType.equals(deviceType) && status==1) {
+                /*Intent intent = new Intent();
                 intent.putExtra("mac", mac);
-                intent.setClass(MainActivity.this, selectedDeviceClass);
-                startActivityForResult(intent, DEVICE);
-            }*/
+                intent.setClass(getApplicationContext(), selectedDeviceClass);
+                startActivityForResult(intent, DEVICE);*/
+            }
         }
 
         @Override
@@ -91,7 +114,7 @@ public class BTConnectionActivity extends AppCompatActivity {
 
         @Override
         public void onScanFinish() {
-            //progressDialog.dismiss();
+            progressDialog.dismiss();
         }
     };
 
