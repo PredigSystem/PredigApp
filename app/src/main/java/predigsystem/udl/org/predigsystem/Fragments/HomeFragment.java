@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -16,6 +18,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -26,6 +29,7 @@ import java.util.Calendar;
 import predigsystem.udl.org.predigsystem.Activities.BTConnectionActivity;
 import predigsystem.udl.org.predigsystem.Activities.BloodPressureMeasurementActivity;
 import predigsystem.udl.org.predigsystem.Activities.HistoryActivity;
+import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
 
@@ -40,6 +44,7 @@ public class HomeFragment extends Fragment {
     private TextView text;
     private Button btn_date;
     private Button btn_time;
+    SQLiteDatabase db;
 
     @Nullable
     @Override
@@ -51,7 +56,8 @@ public class HomeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
+        PredigAppDB predigAppDB = new PredigAppDB(getActivity(), "PredigAppDB", null, 1);
+        db = predigAppDB.getReadableDatabase();
 
         text = (TextView) getActivity().findViewById(R.id.txt_TextDateTime);
         //btn_date = (Button)getActivity().findViewById(R.id.btn_datePicker);
@@ -111,7 +117,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void updateTextLabel(){
-        text.setText(formatDateTime.format(dateTime.getTime()));
+        getLastDate("00000000X");
+        //text.setText(formatDateTime.format(dateTime.getTime()));
     }
 
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
@@ -132,5 +139,12 @@ public class HomeFragment extends Fragment {
             updateTextLabel();
         }
     };
+
+    protected void getLastDate(String nif) {
+        Cursor consult = db.rawQuery("SELECT * FROM VisitsDoctor WHERE NIF='"+nif+"' LIMIT 1;", null);
+        if (consult.moveToFirst()){
+            text.setText("Day: "+consult.getString(1) + "- Hour: " +consult.getString(2));
+        }else {text.setText("No visit");}
+    }
 }
 

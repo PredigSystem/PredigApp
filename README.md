@@ -86,6 +86,7 @@ The used libraries for the project are:
 - [BottomBar](https://github.com/roughike/BottomBar)
 - [GooglePlayServices](https://developers.google.com/android/guides/setup) (For [Maps](https://developers.google.com/maps/documentation/android-api/?hl=es) and [Location](https://developer.android.com/training/location/index.html))
 - [ExpandableLayout](https://github.com/AAkira/ExpandableLayout)
+- [Retrofit](http://square.github.io/retrofit/)
 
 ## Built With
 

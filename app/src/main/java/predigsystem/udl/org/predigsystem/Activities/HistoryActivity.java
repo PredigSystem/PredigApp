@@ -86,8 +86,8 @@ public class HistoryActivity extends AppCompatActivity {
                                         Float pulse = cursor.getFloat(2);
                                         Date date = new Date(cursor.getLong(3));
 
-                                        BloodPressure b = new BloodPressure(syst, dias, pulse, date);
-                                        bpList.add(b);
+                                        //BloodPressure b = new BloodPressure(syst, dias, pulse, date);
+                                        //bpList.add(b);
                                 }
                         } finally {
                                 cursor.close();

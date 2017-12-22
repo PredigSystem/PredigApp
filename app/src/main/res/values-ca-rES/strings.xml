@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="bp_not_saved">No s\'ha pogut guardar la tensió</string>
+    <string name="bp_saved">Tensió guardada</string>
+
     <string name="app_name">PredigSystem</string>
     <string name="home">Inici</string>
     <string name="dashboard">Tauler</string>
@@ -199,4 +202,5 @@ Si la seva pressió arterial és extremadament alta, és possible que tingui mal
         <item>0</item>
         <item>1</item>
     </string-array>
+    <string name="api_fail">Error de xarxa!</string>
 </resources>
