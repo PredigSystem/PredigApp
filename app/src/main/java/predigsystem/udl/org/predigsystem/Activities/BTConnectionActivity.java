@@ -1,10 +1,13 @@
 package predigsystem.udl.org.predigsystem.Activities;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IdRes;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +32,7 @@ public class BTConnectionActivity extends AppCompatActivity {
 
     private static final int BLUETOOTH_ENABLED = 1;
     private static final String selectedDeviceType = "BP5";
+    private static final int REQUEST_PERMISSIONS = 0;
     private static final String TAG = "BP_TAG";
     private String userName = "pbalaguer19@gmail.com";
     private String clientId = "274148308bb64d2db1153a3dddd85476";
@@ -36,6 +40,7 @@ public class BTConnectionActivity extends AppCompatActivity {
     private Boolean bluetoothReady = false;
     private Bp5Control bp5Control;
     private String deviceMac = null;
+    private String devType = null;
     private int callbackId;
 
     @Override
@@ -63,6 +68,8 @@ public class BTConnectionActivity extends AppCompatActivity {
         });
 
         checkBluetooth();
+        checkPermissions();
+
         iHealthDevicesManager.getInstance().init(this, 2, 2);
         callbackId = iHealthDevicesManager.getInstance().registerClientCallback(iHealthDevicesCallback);
         iHealthDevicesManager.getInstance().sdkUserInAuthor(BTConnectionActivity.this, userName, clientId, clientSecret, callbackId);
@@ -83,6 +90,7 @@ public class BTConnectionActivity extends AppCompatActivity {
     }
 
     private void connect(){
+        boolean req = iHealthDevicesManager.getInstance().connectDevice(userName, deviceMac, devType);
         bp5Control = iHealthDevicesManager.getInstance().getBp5Control(deviceMac);
 
         if(bp5Control != null)
@@ -97,12 +105,14 @@ public class BTConnectionActivity extends AppCompatActivity {
         public void onScanDevice(String mac, String deviceType, int rssi) {
             super.onScanDevice(mac, deviceType, rssi);
             deviceMac = mac;
+            devType = deviceType;
         }
 
         @Override
         public void onScanDevice(String mac, String deviceType, int rssi, Map manufactorData) {
             super.onScanDevice(mac, deviceType, rssi, manufactorData);
             deviceMac = mac;
+            devType = deviceType;
         }
 
         @Override
@@ -280,6 +290,23 @@ public class BTConnectionActivity extends AppCompatActivity {
             startActivityForResult(enableIntent,BLUETOOTH_ENABLED);
         } else {
             bluetoothReady = true;
+        }
+    }
+
+    private void checkPermissions() {
+        StringBuilder tempRequest = new StringBuilder();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            tempRequest.append(Manifest.permission.WRITE_EXTERNAL_STORAGE + ",");
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            tempRequest.append(Manifest.permission.RECORD_AUDIO + ",");
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            tempRequest.append(Manifest.permission.ACCESS_FINE_LOCATION + ",");
+        }
+        if (tempRequest.length() > 0) {
+            tempRequest.deleteCharAt(tempRequest.length() - 1);
+            ActivityCompat.requestPermissions(this, tempRequest.toString().split(","), REQUEST_PERMISSIONS);
         }
     }
 
