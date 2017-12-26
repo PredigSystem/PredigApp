@@ -47,9 +47,9 @@ public class LogInActivity extends AppCompatActivity {
                 password = findViewById(R.id.input_password);
                 authorize(user, password);
 
-                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                /*Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
-                finish();
+                finish();*/
             }
         });
     }

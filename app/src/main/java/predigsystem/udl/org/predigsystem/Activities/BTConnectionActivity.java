@@ -34,9 +34,9 @@ public class BTConnectionActivity extends AppCompatActivity {
     private static final String selectedDeviceType = "BP5";
     private static final int REQUEST_PERMISSIONS = 0;
     private static final String TAG = "BP_TAG";
-    private String userName = "pbalaguer19@gmail.com";
-    private String clientId = "274148308bb64d2db1153a3dddd85476";
-    private String clientSecret = "56214c8ecd8f4d85905ef56d8bc37206";
+    private static final String userName = "pbalaguer19@gmail.com";
+    private static final String clientId = "274148308bb64d2db1153a3dddd85476";
+    private static final String clientSecret = "56214c8ecd8f4d85905ef56d8bc37206";
     private Boolean bluetoothReady = false;
     private Bp5Control bp5Control;
     private String deviceMac = null;
