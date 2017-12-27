@@ -17,6 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -45,6 +51,10 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile files('libs/iHealthLibrary_2.3.5.jar')
+    compile files('libs/pl2303driver.jar')
+    compile files('libs/d2xx.jar')
+    compile files('libs/smartlinklib3.6.4_product.jar')
     testCompile 'junit:junit:4.12'
 }
 

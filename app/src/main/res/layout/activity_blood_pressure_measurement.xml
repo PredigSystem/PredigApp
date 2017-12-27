@@ -12,7 +12,7 @@
     android:paddingRight="24dp">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/titleResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -36,6 +36,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/systolicResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -60,6 +61,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/diastolicResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -84,6 +86,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/pulseResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
