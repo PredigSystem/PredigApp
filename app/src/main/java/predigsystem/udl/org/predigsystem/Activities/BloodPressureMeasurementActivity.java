@@ -122,7 +122,6 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
             }
         });
 
-        testNotifications();
     }
 
     @Override
@@ -170,6 +169,7 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
         }
 
         bloodPressure = new BloodPressure("uid123", new Date().getTime(), lat, lon, Double.parseDouble(sys) / 10, Double.parseDouble(dias) / 10, Integer.parseInt(puls));
+        testNotifications(Double.parseDouble(sys), Double.parseDouble(dias));
     }
 
     private void failedValues(String msg){
@@ -218,39 +218,51 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
                 });
     }
 
-    private void testNotifications(){
-        String CHANNEL_ID = "my_channel_01";// The id of the channel.
-        CharSequence name = "channel";// The user-visible name of the channel.
-        int importance = NotificationManager.IMPORTANCE_HIGH;
-        NotificationChannel mChannel = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+    private void testNotifications(Double syst, Double diast){
+        boolean high = false;
+        String type = "";
+        if(syst > 130 || diast >= 80){
+            high = true;
+            type = "Stage 1";
         }
+        if(syst > 140 || diast >= 90) type = "Stage 2";
+        if(syst > 180 || diast >= 120) type = "Hypertensive crisis";
 
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
 
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        if(high){
+            String CHANNEL_ID = "my_channel_01";// The id of the channel.
+            CharSequence name = "channel";// The user-visible name of the channel.
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel mChannel = null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            }
 
-        // this is a my insertion looking for a solution
-        int icon = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? R.drawable.logo: R.mipmap.ic_launcher;
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(icon)
-                .setContentTitle("HIGH Blood pressure!")
-                .setContentText("Take care!")
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
+            Intent intent = new Intent(this, HomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                    PendingIntent.FLAG_ONE_SHOT);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationManager.createNotificationChannel(mChannel);
+            Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+            // this is a my insertion looking for a solution
+            int icon = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? R.drawable.logo: R.mipmap.ic_launcher;
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setSmallIcon(icon)
+                    .setContentTitle("HIGH Blood pressure!")
+                    .setContentText("Type: " + type)
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
+                    .setContentIntent(pendingIntent);
+
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notificationManager.createNotificationChannel(mChannel);
+            }
+
+            notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
         }
-
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
 
@@ -261,14 +273,22 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
             deviceMac = sharedpreferences.getString("mac","");
             devType = sharedpreferences.getString("dType","");
         }
-        request = iHealthDevicesManager.getInstance().connectDevice(userName, deviceMac, devType);
-        bp5Control = iHealthDevicesManager.getInstance().getBp5Control(deviceMac);
+        int tries = 0;
+        do {
+            request = iHealthDevicesManager.getInstance().connectDevice(userName, deviceMac, devType);
+            tries ++;
+        }while (!request && tries < 1000000);
+
+        if(request){
+            do {
+                bp5Control = iHealthDevicesManager.getInstance().getBp5Control(deviceMac);
+            }while (bp5Control == null);
+        }
 
         if(request && bp5Control != null)
             bp5Control.startMeasure();
         else
             failedValues("Cannot connect to the Blood Pressure device!");
-
     }
 
     private com.ihealth.communication.manager.iHealthDevicesCallback iHealthDevicesCallback = new iHealthDevicesCallback() {

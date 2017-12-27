@@ -21,7 +21,7 @@
         <item>Locations</item>
         <item>About</item>
     </string-array>
-    
+
     <string name="receive_notifications">Do you want to receive notifications?</string>
 
 
@@ -107,7 +107,7 @@ Some drugs that you take for another condition may increase blood pressure. Thes
     <string name="marker_orange">Hospitals</string>
     <string name="marker_yellow">Pharmacies</string>
 
-    
+
     <string name="title_activity_settings2">Settings</string>
 
     <!-- Strings related to Settings -->

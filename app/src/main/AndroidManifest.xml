@@ -8,7 +8,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <!-- FOR DEVICE CONNECTION -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -34,18 +34,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Activities.HomeActivity"/>
+        <activity android:name=".Activities.HomeActivity" />
         <activity android:name=".Activities.BTConnectionActivity" />
-        <activity android:name=".Activities.HistoryActivity"/>
+        <activity android:name=".Activities.HistoryActivity" />
         <activity android:name=".Activities.BloodPressureMeasurementActivity" />
-        <activity android:name=".Activities.NotificationSettingsActivity"/>
-        <activity android:name=".Activities.UserSettingsActivity"/>
-        <activity android:name=".Activities.LocationActivity"/>
+        <activity android:name=".Activities.NotificationSettingsActivity" />
+        <activity android:name=".Activities.UserSettingsActivity" />
+        <activity android:name=".Activities.LocationActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD92Nk-q3JrVrcXIxLXTCWMl9x8CNfJi7k" />
+
     </application>
 
 </manifest>
