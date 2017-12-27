@@ -11,14 +11,14 @@ public class VisitsDoctor {
     private String userId;
     private String doctor;
 
-    private Date date;
-    private Time time;
+    private String time;
+    private Long date;
 
     private String reason;
 
     public VisitsDoctor(){}
 
-    public VisitsDoctor(String userId, String doctor, Date date, Time time, String reason) {
+    public VisitsDoctor(String userId, String doctor, Long date, String time, String reason) {
         this.userId = userId;
         this.doctor = doctor;
         this.date = date;
@@ -43,19 +43,19 @@ public class VisitsDoctor {
         this.doctor = doctor;
     }
 
-    public Date getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 
-    public Time getTime () {
+    public String getTime () {
         return this.time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time){
         this.time = time;
     }
 
