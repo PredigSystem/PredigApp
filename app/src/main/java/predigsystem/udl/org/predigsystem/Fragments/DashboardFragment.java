@@ -1,6 +1,8 @@
 package predigsystem.udl.org.predigsystem.Fragments;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -54,7 +56,8 @@ public class DashboardFragment extends Fragment {
     List<BloodPressure> todayBP = new ArrayList<>();
     List<BloodPressure> bloodPressureList;
 
-
+    SharedPreferences sharedpreferences;
+    private final static String USER_INFO = "userInfo";
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -74,7 +77,9 @@ public class DashboardFragment extends Fragment {
 
         chart = getActivity().findViewById(R.id.chart);
 
-        getAPIInformation("uid123");
+        sharedpreferences = getActivity().getSharedPreferences(USER_INFO, Context.MODE_PRIVATE);
+        String user = sharedpreferences.getString("uid", "uid123");
+        getAPIInformation(user);
 
         lastBP.enqueue(new Callback<BloodPressure>() {
             @Override

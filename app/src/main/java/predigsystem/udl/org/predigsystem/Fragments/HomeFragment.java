@@ -3,7 +3,6 @@ package predigsystem.udl.org.predigsystem.Fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -23,18 +22,14 @@ import android.widget.Toast;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import predigsystem.udl.org.predigsystem.Activities.BTConnectionActivity;
 import predigsystem.udl.org.predigsystem.Activities.BloodPressureMeasurementActivity;
-import predigsystem.udl.org.predigsystem.Activities.HistoryActivity;
 import predigsystem.udl.org.predigsystem.Activities.NoDeviceBloodPressureActivity;
 import predigsystem.udl.org.predigsystem.Api.APIConnector;
 import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
-import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.JavaClasses.VisitsDoctor;
 import predigsystem.udl.org.predigsystem.R;
 import retrofit2.Call;
@@ -85,26 +80,6 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), NoDeviceBloodPressureActivity.class);
                 startActivity(intent);
-            }
-        });
-
-
-        BottomBar bottomBar = (BottomBar) getActivity().findViewById(R.id.bottomBar);
-        bottomBar.setDefaultTab(R.id.tab_home);
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(@IdRes int tabId) {
-                Intent intent;
-                if (tabId == R.id.tab_favourites) {
-                    intent = new Intent(getContext(), HistoryActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
-                if (tabId == R.id.tab_host) {
-                    intent = new Intent(getContext(), BTConnectionActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
             }
         });
 

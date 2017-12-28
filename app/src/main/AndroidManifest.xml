@@ -35,8 +35,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.HomeActivity" />
-        <activity android:name=".Activities.BTConnectionActivity" />
-        <activity android:name=".Activities.HistoryActivity" />
         <activity android:name=".Activities.BloodPressureMeasurementActivity" />
         <activity android:name=".Activities.NotificationSettingsActivity" />
         <activity android:name=".Activities.UserSettingsActivity" />

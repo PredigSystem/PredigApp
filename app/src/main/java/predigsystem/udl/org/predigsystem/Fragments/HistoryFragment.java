@@ -42,7 +42,9 @@ public class HistoryFragment extends Fragment {
 
     ListView sysList, diasList, pulseList, timeList;
 
+    public HistoryFragment(){
 
+    }
 
     @Nullable
     @Override

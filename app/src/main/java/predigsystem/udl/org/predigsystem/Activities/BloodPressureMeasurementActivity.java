@@ -116,7 +116,7 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
                     failedValues(getString(R.string.bp_not_saved));
                 }
                 getAPIInformation(bloodPressure);
-                Intent intent2 = new Intent(getApplicationContext(), HistoryActivity.class);
+                Intent intent2 = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent2);
                 finish();
             }
