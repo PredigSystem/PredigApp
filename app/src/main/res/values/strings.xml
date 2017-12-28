@@ -198,4 +198,7 @@ Some drugs that you take for another condition may increase blood pressure. Thes
     <string name="reason"> Reason </string>
     <string name="NextVisit"> Next visit </string>
 
+    <string name="btnStart">Start measuring</string>
+    <string name="btnStart2">Enter new measure</string>
+
 </resources>

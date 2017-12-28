@@ -30,6 +30,7 @@ import java.util.Date;
 import predigsystem.udl.org.predigsystem.Activities.BTConnectionActivity;
 import predigsystem.udl.org.predigsystem.Activities.BloodPressureMeasurementActivity;
 import predigsystem.udl.org.predigsystem.Activities.HistoryActivity;
+import predigsystem.udl.org.predigsystem.Activities.NoDeviceBloodPressureActivity;
 import predigsystem.udl.org.predigsystem.Api.APIConnector;
 import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
@@ -78,6 +79,15 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        getActivity().findViewById(R.id.btn_start_2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), NoDeviceBloodPressureActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         BottomBar bottomBar = (BottomBar) getActivity().findViewById(R.id.bottomBar);
         bottomBar.setDefaultTab(R.id.tab_home);

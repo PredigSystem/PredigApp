@@ -115,7 +115,7 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
                 if(bloodPressure == null){
                     failedValues(getString(R.string.bp_not_saved));
                 }
-                getAPIInformation("uid123", bloodPressure);
+                getAPIInformation(bloodPressure);
                 Intent intent2 = new Intent(getApplicationContext(), HistoryActivity.class);
                 startActivity(intent2);
                 finish();
@@ -168,7 +168,8 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
             lon = userLocation.getLongitude();
         }
 
-        bloodPressure = new BloodPressure("uid123", new Date().getTime(), lat, lon, Double.parseDouble(sys) / 10, Double.parseDouble(dias) / 10, Integer.parseInt(puls));
+        String user = sharedpreferences.getString("uid", "uid123");
+        bloodPressure = new BloodPressure(user, new Date().getTime(), lat, lon, Double.parseDouble(sys) / 10, Double.parseDouble(dias) / 10, Integer.parseInt(puls));
         testNotifications(Double.parseDouble(sys), Double.parseDouble(dias));
     }
 
@@ -177,7 +178,7 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
         finish();
     }
 
-    private void getAPIInformation(String user, BloodPressure bloodPressure){
+    private void getAPIInformation(BloodPressure bloodPressure){
         service = APIConnector.getConnection();
         service.newBloodPressureToUser(bloodPressure).enqueue(new Callback<BloodPressure>() {
             @Override

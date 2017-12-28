@@ -210,4 +210,7 @@ Si la seva pressió arterial és extremadament alta, és possible que tingui mal
     <string name="Reason"> Motiu </string>
     <string name="NextVisit"> Següent visita </string>
 
+    <string name="btnStart">Comença a mesurar</string>
+    <string name="btnStart2">Entra una nova mesura</string>
+
 </resources>

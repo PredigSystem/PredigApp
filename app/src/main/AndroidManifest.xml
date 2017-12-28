@@ -46,6 +46,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD92Nk-q3JrVrcXIxLXTCWMl9x8CNfJi7k" />
 
+        <activity android:name=".Activities.NoDeviceBloodPressureActivity"></activity>
     </application>
 
 </manifest>

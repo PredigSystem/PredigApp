@@ -4,70 +4,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="predigsystem.udl.org.predigsystem.Fragments.HomeFragment">
+    tools:context="predigsystem.udl.org.predigsystem.Fragments.HomeFragment"
+    android:weightSum="10">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:text="Welcome to PredigSystem"
-        android:textAllCaps="true"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:layout_weight="3"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/welcome" />
+    </LinearLayout>
 
 
     <LinearLayout
-        android:id="@+id/bottombar"
-        android:layout_width="574dp"
-        android:layout_height="247dp"
-        android:layout_marginBottom="0dp"
-        android:layout_weight="10"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:gravity="center">
 
-        <Button
+
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_start"
-            android:layout_width="260dp"
-            android:layout_height="140dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="220dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/round_button"
-            android:text="Start"
-            android:textColor="@android:color/white"
-            android:visibility="visible" />
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnStart" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_start_2"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnStart2" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:text="Next visit to the doctor"
             android:textAlignment="center"
-            android:textColor="@color/md_red_500"
+            android:textColor="@color/md_blue_grey_800"
             android:textSize="24dp" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Next Visit to the Doctor"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/md_blue_A700"
             android:textSize="16dp"
             android:id="@+id/txt_TextDateTime" />
     </LinearLayout>
