@@ -6,6 +6,7 @@
     <string name="app_name">PredigSystem</string>
     <string name="home">Inici</string>
     <string name="dashboard">Tauler</string>
+    <string name="history">Històric</string>
     <string name="map">Mapa</string>
     <string name="calendar">Calendari</string>
     <string name="other">Altres</string>
@@ -212,5 +213,6 @@ Si la seva pressió arterial és extremadament alta, és possible que tingui mal
 
     <string name="btnStart">Comença a mesurar</string>
     <string name="btnStart2">Entra una nova mesura</string>
+    <string name="bplist_not_found">Llista d\'històrics no troada</string>
 
 </resources>

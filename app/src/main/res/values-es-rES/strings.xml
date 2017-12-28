@@ -6,6 +6,7 @@
     <string name="app_name">PredigSystem</string>
     <string name="home">Inicio</string>
     <string name="dashboard">Tablero</string>
+    <string name="history">Historico</string>
     <string name="map">Mapa</string>
     <string name="calendar">Calendario</string>
     <string name="other">Otros</string>
@@ -207,4 +208,5 @@
 
     <string name="btnStart">Empieza a medir</string>
     <string name="btnStart2">Entra una nueva medida</string>
+    <string name="bplist_not_found">Lista de historicos no encontrada</string>
 </resources>
