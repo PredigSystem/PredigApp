@@ -11,19 +11,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import predigsystem.udl.org.predigsystem.R;
 
 
-public class UserSettingsActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class UserSettingsActivity extends PreferenceActivity {
     final int RESULT_SETTINGS = 1;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences);    }
+        addPreferencesFromResource(R.xml.preferences);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -55,11 +57,6 @@ public class UserSettingsActivity extends PreferenceActivity implements SharedPr
         TextView settingsTextView = (TextView) findViewById(R.id.textUserSettings);
 
         settingsTextView.setText(builder.toString());
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
     }
 }
 

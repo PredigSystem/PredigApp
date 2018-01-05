@@ -13,6 +13,7 @@ import android.location.Location;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -106,7 +107,8 @@ public class NoDeviceBloodPressureActivity extends AppCompatActivity implements 
 
         String user = sharedpreferences.getString("uid", "uid123");
         BloodPressure bloodPressure = new BloodPressure(user, new Date().getTime(), lat, lon, syst, diast, puls);
-        testNotifications(bloodPressure.getSystolic(), bloodPressure.getDiastolic());
+        if(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("notifications_new_message", true))
+            testNotifications(bloodPressure.getSystolic(), bloodPressure.getDiastolic());
 
         if(NetworkManager.checkConnection(getApplicationContext())){
             getAPIInformation(bloodPressure);

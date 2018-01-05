@@ -4,6 +4,7 @@ import java.util.List;
 
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.JavaClasses.LogIn;
+import predigsystem.udl.org.predigsystem.JavaClasses.User;
 import predigsystem.udl.org.predigsystem.JavaClasses.UserID;
 import predigsystem.udl.org.predigsystem.JavaClasses.VisitsDoctor;
 import retrofit2.Call;
@@ -35,4 +36,7 @@ public interface PredigAPIService {
 
     @POST("user/logIn")
     Call<UserID> logIn(@Body LogIn logIn);
+
+    @POST("user/update")
+    Call<User> updateUser(@Body User user);
 }

@@ -3,11 +3,13 @@ package predigsystem.udl.org.predigsystem.Fragments;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -128,10 +130,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         userLocation.setLatitude(41.6183731);
         userLocation.setLongitude(0.6024253);
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        Float zoom = 10f;
+        try {
+            zoom = Float.parseFloat(prefs.getString("prefRadiusLocation", "10"));
+        }catch (Exception e){}
+
         getUserLocation();
         LatLng userLoc = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());;
         mGoogleMap.addMarker(new MarkerOptions().position(userLoc).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLoc, 12f));
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLoc, zoom));
 
         StringBuilder sbValue = new StringBuilder(sbMethod("hospital"));
         PlacesTask placesTask = new PlacesTask();

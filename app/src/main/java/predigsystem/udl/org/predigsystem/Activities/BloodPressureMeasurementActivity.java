@@ -177,7 +177,8 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
 
         String user = sharedpreferences.getString("uid", "uid123");
         bloodPressure = new BloodPressure(user, new Date().getTime(), lat, lon, Double.parseDouble(sys) / 10, Double.parseDouble(dias) / 10, Integer.parseInt(puls));
-        testNotifications(Double.parseDouble(sys), Double.parseDouble(dias));
+        if(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("notifications_new_message", true))
+            testNotifications(Double.parseDouble(sys), Double.parseDouble(dias));
     }
 
     private void failedValues(String msg){

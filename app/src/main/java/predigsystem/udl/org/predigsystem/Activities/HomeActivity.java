@@ -67,12 +67,15 @@ public class HomeActivity extends AppCompatActivity {
         SecondaryDrawerItem faq = new SecondaryDrawerItem().withIdentifier(6).withName(R.string.faq).withIcon(FontAwesome.Icon.faw_question);
         SecondaryDrawerItem logout = new SecondaryDrawerItem().withIdentifier(7).withName(R.string.logout).withIcon(FontAwesome.Icon.faw_sign_out);
 
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
         // Menu Header
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
                 .addProfiles(
-                        new ProfileDrawerItem().withName("Pau Balaguer").withEmail("pbl5@alumnes.udl.cat").withIcon(this.getResources().getDrawable(R.drawable.user))
+                        new ProfileDrawerItem().withName(prefs.getString("name", "John Smith")).withEmail(prefs.getString("email_address", "john@smith.com")).withIcon(this.getResources().getDrawable(R.drawable.user))
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override

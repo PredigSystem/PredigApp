@@ -7,26 +7,26 @@
         android:key="personal_category">
 
         <EditTextPreference
+            android:inputType="text"
+            android:key="name"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/pref_title_display_name"
+            android:summary="Enter Your Name"
+            android:dialogTitle="Enter Your Name"
+            android:dialogMessage="Enter Your Name"
+            android:defaultValue="John Smith"/>
+
+
+        <EditTextPreference
             android:key="email_address"
             android:title="Change Email Address"
             android:summary="Enter Your New Email Address"
             android:dialogTitle="Enter Your New Email Address"
             android:dialogMessage="Enter Your New Email Address"
-            android:defaultValue=""
-            android:inputType="textEmailAddress"/>
-
-        <EditTextPreference
-            android:defaultValue=""
-            android:inputType="textPassword"
-            android:key="password"
-            android:maxLines="1"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:password="true"
-            android:title="@string/pref_title_display_password"
-            android:summary="Enter Your New Password"
-            android:dialogTitle="Enter Your New Password"
-            android:dialogMessage="Enter Your New Password"/>
+            android:inputType="textEmailAddress"
+            android:defaultValue="john@smith.com"/>
 
     </PreferenceCategory>
 
