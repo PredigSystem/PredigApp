@@ -48,7 +48,6 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //TODO Get the nif and the name by the nif;
         Session session;
         try{
             String text = getIntent().getExtras().getString("nif");

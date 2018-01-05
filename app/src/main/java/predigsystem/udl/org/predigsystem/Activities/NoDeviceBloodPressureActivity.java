@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.media.RingtoneManager;
@@ -112,6 +113,7 @@ public class NoDeviceBloodPressureActivity extends AppCompatActivity implements 
 
         if(NetworkManager.checkConnection(getApplicationContext())){
             getAPIInformation(bloodPressure);
+            saveOtherLocalMeasurements();
         }else{
             saveMeasureDataBase(bloodPressure);
         }
@@ -214,6 +216,30 @@ public class NoDeviceBloodPressureActivity extends AppCompatActivity implements 
 
             notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
         }
+    }
+
+    private void saveOtherLocalMeasurements(){
+        PredigAppDB predigAppDB = new PredigAppDB(getApplicationContext(), "PredigAppDB", null, 1);
+        SQLiteDatabase db = predigAppDB.getReadableDatabase();
+
+        String user = sharedpreferences.getString("uid", "uid123");
+        Cursor consult = db.rawQuery("SELECT * FROM BloodPressure WHERE NIF='"+ user +"';", null);
+
+        if(consult.moveToFirst()) {
+            //(Systolic, Diastolic, Pulse, Date, Latitude, Longitude, nif)
+            do {
+                Double sys = consult.getDouble(0);
+                Double dias = consult.getDouble(1);
+                Integer pulse = consult.getInt(2);
+                Long time = consult.getLong(3);
+                Double lat = consult.getDouble(4);
+                Double lon = consult.getDouble(5);
+                BloodPressure bloodPressure = new BloodPressure(user, new Date().getTime(), lat, lon, sys, dias, pulse);
+                getAPIInformation(bloodPressure);
+
+            } while (consult.moveToNext());
+        }
+        db.execSQL("DELETE FROM BloodPressure WHERE NIF='"+ user +"';");
     }
 
 }
