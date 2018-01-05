@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,15 +16,14 @@ import android.widget.TextView;
 import predigsystem.udl.org.predigsystem.R;
 
 
-public class UserSettingsActivity extends PreferenceActivity {
+public class UserSettingsActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+    final int RESULT_SETTINGS = 1;
 
-    private static final int RESULT_SETTINGS = 1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences);
-    }
+        addPreferencesFromResource(R.xml.preferences);    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -56,5 +56,10 @@ public class UserSettingsActivity extends PreferenceActivity {
 
         settingsTextView.setText(builder.toString());
     }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
     }
+}
 

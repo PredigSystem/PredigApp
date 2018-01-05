@@ -214,5 +214,6 @@ Si la seva pressió arterial és extremadament alta, és possible que tingui mal
     <string name="btnStart">Comença a mesurar</string>
     <string name="btnStart2">Entra una nova mesura</string>
     <string name="bplist_not_found">Llista d\'històrics no troada</string>
+    <string name="noConnection">No s\'ha pogut obtenir la informació. Revisa la configuració.</string>
 
 </resources>

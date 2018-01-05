@@ -3,7 +3,9 @@ package predigsystem.udl.org.predigsystem.Fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -32,6 +34,7 @@ import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
 import predigsystem.udl.org.predigsystem.JavaClasses.VisitsDoctor;
 import predigsystem.udl.org.predigsystem.R;
+import predigsystem.udl.org.predigsystem.Utils.NetworkManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,6 +52,8 @@ public class HomeFragment extends Fragment {
     private TextView text;
     SQLiteDatabase db;
     VisitsDoctor vd = null;
+    SharedPreferences sharedpreferences;
+    private final static String USER_INFO = "userInfo";
 
 
     @Nullable
@@ -85,32 +90,40 @@ public class HomeFragment extends Fragment {
 
         updateTextLabel();
 
-        nextVisit.enqueue(new Callback<VisitsDoctor>() {
-            @Override
-            public void onResponse(Call<VisitsDoctor> call, Response<VisitsDoctor> response) {
-                vd = response.body();
-                if(vd != null){
-                    //Toast.makeText(getContext(), vd.getDate().toString(), Toast.LENGTH_LONG).show();
-                    printVisit();
+        if(nextVisit != null){
+            nextVisit.enqueue(new Callback<VisitsDoctor>() {
+                @Override
+                public void onResponse(Call<VisitsDoctor> call, Response<VisitsDoctor> response) {
+                    vd = response.body();
+                    if(vd != null){
+                        printVisit();
+                    }
+                    else {
+                        text.setText("No visit");
+                    }
                 }
-                else {
-                    text.setText("No visit");
+
+                @Override
+                public void onFailure(Call<VisitsDoctor> call, Throwable t) {
+                    Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
                 }
-            }
+            });
 
-            @Override
-            public void onFailure(Call<VisitsDoctor> call, Throwable t) {
-                Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        }
     }
 
 
     private void updateTextLabel(){
-        getLastDate("00000000X");
-        getVisitInformationApi("uid123");
-        //text.setText(formatDateTime.format(dateTime.getTime()));
+        sharedpreferences = getActivity().getSharedPreferences(USER_INFO, Context.MODE_PRIVATE);
+        String user = sharedpreferences.getString("uid", "uid123");
+
+        if(NetworkManager.checkConnection(getContext())){
+            getVisitInformationApi(user);
+        }else{
+            Toast.makeText(getContext(), getString(R.string.noConnection), Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
@@ -131,13 +144,6 @@ public class HomeFragment extends Fragment {
             updateTextLabel();
         }
     };
-
-    protected void getLastDate(String nif) {
-        Cursor consult = db.rawQuery("SELECT * FROM VisitsDoctor WHERE NIF='"+nif+"' LIMIT 1;", null);
-        if (consult.moveToFirst()){
-            text.setText("Day: "+consult.getString(1) + "- Hour: " +consult.getString(2));
-        }else {text.setText("No visit");}
-    }
 
     protected void getVisitInformationApi(String user) {
         PredigAPIService service = APIConnector.getConnectionWithGson();

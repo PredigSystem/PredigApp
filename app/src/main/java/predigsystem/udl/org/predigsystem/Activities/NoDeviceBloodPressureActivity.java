@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -31,8 +32,10 @@ import java.util.Date;
 
 import predigsystem.udl.org.predigsystem.Api.APIConnector;
 import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
+import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
+import predigsystem.udl.org.predigsystem.Utils.NetworkManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -105,7 +108,21 @@ public class NoDeviceBloodPressureActivity extends AppCompatActivity implements 
         BloodPressure bloodPressure = new BloodPressure(user, new Date().getTime(), lat, lon, syst, diast, puls);
         testNotifications(bloodPressure.getSystolic(), bloodPressure.getDiastolic());
 
-        getAPIInformation(bloodPressure);
+        if(NetworkManager.checkConnection(getApplicationContext())){
+            getAPIInformation(bloodPressure);
+        }else{
+            saveMeasureDataBase(bloodPressure);
+        }
+    }
+
+    protected void saveMeasureDataBase(BloodPressure bloodPressure){
+        PredigAppDB predigAppDB = new PredigAppDB(this, "PredigAppDB", null, 1);
+        SQLiteDatabase db = predigAppDB.getWritableDatabase();
+
+        if(db != null) {
+            String user = sharedpreferences.getString("uid", "uid123");
+            db.execSQL("INSERT INTO BloodPressure (Systolic, Diastolic, Pulse, Date, Latitude, Longitude, nif) VALUES ('" +bloodPressure.getSystolic() +"', '"+bloodPressure.getDiastolic()+"', '"+bloodPressure.getPulse()+"', '"+bloodPressure.getDate()+"', '"+userLocation.getLatitude()+"', '" + userLocation.getLongitude()+"', '" + user+ ")");
+        }
     }
 
     private void getAPIInformation(BloodPressure bloodPressure){

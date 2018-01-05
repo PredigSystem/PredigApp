@@ -202,5 +202,6 @@ Some drugs that you take for another condition may increase blood pressure. Thes
     <string name="btnStart">Start measuring</string>
     <string name="btnStart2">Enter new measure</string>
     <string name="bplist_not_found">Blood Pressure list not found</string>
+    <string name="noConnection">We could not get the information. Review your settings.</string>
 
 </resources>

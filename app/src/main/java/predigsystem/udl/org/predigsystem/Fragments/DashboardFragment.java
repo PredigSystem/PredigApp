@@ -38,6 +38,7 @@ import predigsystem.udl.org.predigsystem.Api.APIConnector;
 import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
+import predigsystem.udl.org.predigsystem.Utils.NetworkManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -79,52 +80,59 @@ public class DashboardFragment extends Fragment {
 
         sharedpreferences = getActivity().getSharedPreferences(USER_INFO, Context.MODE_PRIVATE);
         String user = sharedpreferences.getString("uid", "uid123");
-        getAPIInformation(user);
 
-        lastBP.enqueue(new Callback<BloodPressure>() {
-            @Override
-            public void onResponse(Call<BloodPressure> call, Response<BloodPressure> response) {
-                BloodPressure bp = response.body();
-                if(bp != null){
-                    ((TextView)getActivity().findViewById(R.id.lastSystolic)).setText("" + bp.getSystolic());
-                    ((TextView)getActivity().findViewById(R.id.lastDiastolic)).setText("" + bp.getDiastolic());
-                    ((TextView)getActivity().findViewById(R.id.lastPulse)).setText("" + bp.getPulse());
-                }
-            }
+        if(NetworkManager.checkConnection(getContext())){
+            getAPIInformation(user);
+        }else{
+            Toast.makeText(getContext(), getString(R.string.noConnection), Toast.LENGTH_SHORT).show();
+        }
 
-            @Override
-            public void onFailure(Call<BloodPressure> call, Throwable t) {
-                Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        bpList.enqueue(new Callback<List<BloodPressure>>() {
-            @Override
-            public void onResponse(Call<List<BloodPressure>> call, Response<List<BloodPressure>> response) {
-                bloodPressureList = response.body();
-                try{
-                    for(BloodPressure b: bloodPressureList){
-                        if(b.getDate() != null){
-                            entryList.add(new Entry(b.getDate(), b.getSystolic().floatValue()));
-                            entryList2.add(new Entry(b.getDate(), b.getDiastolic().floatValue()));
-                        }
-
-                        if(isToday(b.getDate())){
-                            todayBP.add(b);
-                        }
+        if(lastBP != null && bpList != null){
+            lastBP.enqueue(new Callback<BloodPressure>() {
+                @Override
+                public void onResponse(Call<BloodPressure> call, Response<BloodPressure> response) {
+                    BloodPressure bp = response.body();
+                    if(bp != null){
+                        ((TextView)getActivity().findViewById(R.id.lastSystolic)).setText("" + bp.getSystolic());
+                        ((TextView)getActivity().findViewById(R.id.lastDiastolic)).setText("" + bp.getDiastolic());
+                        ((TextView)getActivity().findViewById(R.id.lastPulse)).setText("" + bp.getPulse());
                     }
-                }catch (Exception e){
+                }
+
+                @Override
+                public void onFailure(Call<BloodPressure> call, Throwable t) {
                     Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
                 }
+            });
 
-                buildChart();
-            }
+            bpList.enqueue(new Callback<List<BloodPressure>>() {
+                @Override
+                public void onResponse(Call<List<BloodPressure>> call, Response<List<BloodPressure>> response) {
+                    bloodPressureList = response.body();
+                    try{
+                        for(BloodPressure b: bloodPressureList){
+                            if(b.getDate() != null){
+                                entryList.add(new Entry(b.getDate(), b.getSystolic().floatValue()));
+                                entryList2.add(new Entry(b.getDate(), b.getDiastolic().floatValue()));
+                            }
 
-            @Override
-            public void onFailure(Call<List<BloodPressure>> call, Throwable t) {
-                Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
-            }
-        });
+                            if(isToday(b.getDate())){
+                                todayBP.add(b);
+                            }
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
+                    }
+
+                    buildChart();
+                }
+
+                @Override
+                public void onFailure(Call<List<BloodPressure>> call, Throwable t) {
+                    Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     private void getAPIInformation(String user){

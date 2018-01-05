@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -43,9 +44,11 @@ import java.util.Map;
 
 import predigsystem.udl.org.predigsystem.Api.APIConnector;
 import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
+import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
 
+import predigsystem.udl.org.predigsystem.Utils.NetworkManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -115,7 +118,11 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
                 if(bloodPressure == null){
                     failedValues(getString(R.string.bp_not_saved));
                 }
-                getAPIInformation(bloodPressure);
+                if(NetworkManager.checkConnection(getApplicationContext())){
+                    getAPIInformation(bloodPressure);
+                }else{
+                    saveMeasureDataBase();
+                }
                 Intent intent2 = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent2);
                 finish();
@@ -130,15 +137,15 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
         iHealthDevicesManager.getInstance().unRegisterClientCallback(callbackId);
     }
 
-    //TODO: Add local database
-    /*protected void saveMeasureDataBase(){
+    protected void saveMeasureDataBase(){
         PredigAppDB predigAppDB = new PredigAppDB(this, "PredigAppDB", null, 1);
         SQLiteDatabase db = predigAppDB.getWritableDatabase();
 
         if(db != null) {
-            db.execSQL("INSERT INTO BloodPressure (Systolic, Diastolic, Pulse, Date, Latitude, Longitude, nif) VALUES ('" +bloodPressure.getSystolic() +"', '"+bloodPressure.getDiastolic()+"', '"+bloodPressure.getPulse()+"', '"+bloodPressure.getDate().getTime()+"', '"+userLocation.getLatitude()+"', '" + userLocation.getLongitude()+"', '00000000X')");
+            String user = sharedpreferences.getString("uid", "uid123");
+            db.execSQL("INSERT INTO BloodPressure (Systolic, Diastolic, Pulse, Date, Latitude, Longitude, nif) VALUES ('" +bloodPressure.getSystolic() +"', '"+bloodPressure.getDiastolic()+"', '"+bloodPressure.getPulse()+"', '"+bloodPressure.getDate()+"', '"+userLocation.getLatitude()+"', '" + userLocation.getLongitude()+"', '" + user+ ")");
         }
-    }*/
+    }
 
     private void setLoadingValues(){
         title.setText("Loading...");

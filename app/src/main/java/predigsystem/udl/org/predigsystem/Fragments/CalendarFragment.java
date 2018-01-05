@@ -2,7 +2,9 @@ package predigsystem.udl.org.predigsystem.Fragments;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -43,6 +45,7 @@ import predigsystem.udl.org.predigsystem.Database.PredigAppDB;
 import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.VisitsDoctor;
 import predigsystem.udl.org.predigsystem.R;
+import predigsystem.udl.org.predigsystem.Utils.NetworkManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,6 +62,9 @@ public class CalendarFragment extends Fragment{
     private Call<List<VisitsDoctor>> visitsList;
     private VisitsDoctor vd = null;
     CalendarView calendarView = null;
+    SharedPreferences sharedpreferences;
+    private final static String USER_INFO = "userInfo";
+
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -81,27 +87,36 @@ public class CalendarFragment extends Fragment{
 
         calendarView = (CalendarView) getActivity().findViewById(R.id.calendar);
 
-        getVisits("00000000X");
-        getAPIInformation("uid123");
+        sharedpreferences = getActivity().getSharedPreferences(USER_INFO, Context.MODE_PRIVATE);
+        String user = sharedpreferences.getString("uid", "uid123");
 
+        if(NetworkManager.checkConnection(getContext())){
+            getAPIInformation(user);
+        }else{
+            Toast.makeText(getContext(), getString(R.string.noConnection), Toast.LENGTH_SHORT).show();
+        }
 
-        nextVisit.enqueue(new Callback<VisitsDoctor>() {
-            @Override
-            public void onResponse(Call<VisitsDoctor> call, Response<VisitsDoctor> response) {
-                vd = response.body();
-                if(vd != null){
-                    //Toast.makeText(getContext(), vd.getDate().toString(), Toast.LENGTH_LONG).show();
-                    addVisit(vd.getDate());
+        //getVisits("00000000X");
+
+        if(nextVisit != null){
+            nextVisit.enqueue(new Callback<VisitsDoctor>() {
+                @Override
+                public void onResponse(Call<VisitsDoctor> call, Response<VisitsDoctor> response) {
+                    vd = response.body();
+                    if(vd != null){
+                        //Toast.makeText(getContext(), vd.getDate().toString(), Toast.LENGTH_LONG).show();
+                        addVisit(vd.getDate());
+                    }
+                    else {
+                    }
                 }
-                else {
-                }
-            }
 
-            @Override
-            public void onFailure(Call<VisitsDoctor> call, Throwable t) {
-                Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<VisitsDoctor> call, Throwable t) {
+                    Toast.makeText(getContext(), R.string.api_fail, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -120,7 +135,6 @@ public class CalendarFragment extends Fragment{
                 String date = consult.getString(0);
                 String time = consult.getString(1);
             }while(consult.moveToNext());
-
     }
 
     private void getAPIInformation(String user){

@@ -209,4 +209,5 @@
     <string name="btnStart">Empieza a medir</string>
     <string name="btnStart2">Entra una nueva medida</string>
     <string name="bplist_not_found">Lista de historicos no encontrada</string>
+    <string name="noConnection">No pudimos obtener la información. Revisa la configuración.</string>
 </resources>

@@ -21,6 +21,7 @@ import predigsystem.udl.org.predigsystem.Api.APIConnector;
 import predigsystem.udl.org.predigsystem.Api.PredigAPIService;
 import predigsystem.udl.org.predigsystem.JavaClasses.BloodPressure;
 import predigsystem.udl.org.predigsystem.R;
+import predigsystem.udl.org.predigsystem.Utils.NetworkManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,7 +53,11 @@ public class HistoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         sharedpreferences = getActivity().getSharedPreferences(USER_INFO, Context.MODE_PRIVATE);
 
-        getAPIInformation();
+        if(NetworkManager.checkConnection(getContext())){
+            getAPIInformation();
+        }else{
+            Toast.makeText(getContext(), getString(R.string.noConnection), Toast.LENGTH_SHORT).show();
+        }
 
         sysList = view.findViewById(R.id.historicListSyst);
         diasList = view.findViewById(R.id.historicListDiast);

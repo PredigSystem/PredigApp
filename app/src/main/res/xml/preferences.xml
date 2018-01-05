@@ -48,7 +48,7 @@
 
     <PreferenceCategory android:title="@string/pref_network" >
         <ListPreference
-            android:defaultValue="false"
+            android:defaultValue="1"
             android:key="prefNetwork"
             android:summary="@string/pref_network_type_summary"
             android:title="@string/pref_network_type"
