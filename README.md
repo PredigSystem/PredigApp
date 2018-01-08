@@ -1,5 +1,5 @@
 # PredigApp
-![alt text](https://www.dropbox.com/s/l70jkqvriviixyu/logo_little.png?raw=1)
+![alt text](https://www.dropbox.com/s/0dryuoaawrihqbi/welcome.png?raw=1)
 
 Predig System Android Application
 
@@ -13,15 +13,15 @@ Website template can be found [here](https://github.com/PredigSystem/PredigWebAp
 
 ## Screenshots
 
-![alt text](https://www.dropbox.com/s/faxw8kzhntcl5o1/1.jpg?raw=1)
+![alt text](https://www.dropbox.com/s/gj3t00u13lijhhg/1.png?raw=1)
 
-![alt text](https://www.dropbox.com/s/71yycsrb3016fk0/2.jpg?raw=1)
+![alt text](https://www.dropbox.com/s/9t9qfhr70285vkc/2.png?raw=1)
 
-![alt text](https://www.dropbox.com/s/r43v3od5s90vxgk/3.jpg?raw=1)
+![alt text](https://www.dropbox.com/s/umdeisfvk7wr2bj/3.png?raw=1)
 
-![alt text](https://www.dropbox.com/s/crrph0pzunw4enq/4.jpg?raw=1)
+![alt text](https://www.dropbox.com/s/jq8oyafdtnqia8j/4.png?raw=1)
 
-![alt text](https://www.dropbox.com/s/wp4pxghol4abmn8/5.jpg?raw=1)
+![alt text](https://www.dropbox.com/s/ji0ezc924jatjvi/5.png?raw=1)
 
 
 ## Getting Started
