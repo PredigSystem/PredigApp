@@ -205,7 +205,6 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
         });
     }
 
-
     public void getUserLocation () {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -312,7 +311,7 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
         do {
             request = iHealthDevicesManager.getInstance().connectDevice(userName, deviceMac, devType);
             tries ++;
-        }while (!request && tries < 1000000);
+        }while (!request && tries < 10000);
 
         if(request){
             do {
@@ -351,7 +350,9 @@ public class BloodPressureMeasurementActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onUserStatus(String username, int userStatus) {}
+        public void onUserStatus(String username, int userStatus) {
+            Log.i(TAG, "userStatus: " + userStatus);
+        }
 
         @Override
         public void onDeviceNotify(String mac, String deviceType, String action, String message) {

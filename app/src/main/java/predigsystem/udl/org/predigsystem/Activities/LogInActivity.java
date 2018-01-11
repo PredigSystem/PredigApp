@@ -66,12 +66,16 @@ public class LogInActivity extends AppCompatActivity {
             public void onResponse(Call<UserID> call, Response<UserID> response) {
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
 
-                SharedPreferences.Editor editor = getSharedPreferences(USER_INFO, MODE_PRIVATE).edit();
-                editor.putString("uid", response.body().getUserid());
-                editor.apply();
+                if(response.code() != 200){
+                    Toast.makeText(getApplicationContext(), "User or password incorrect", Toast.LENGTH_SHORT).show();
+                }else{
+                    SharedPreferences.Editor editor = getSharedPreferences(USER_INFO, MODE_PRIVATE).edit();
+                    editor.putString("uid", response.body().getUserid());
+                    editor.apply();
 
-                startActivity(intent);
-                finish();
+                    startActivity(intent);
+                    finish();
+                }
             }
 
             @Override
